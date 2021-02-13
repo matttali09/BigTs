@@ -6,26 +6,30 @@ class AccountPage extends Component {
     state = {
         user: this.props.user,
         role: this.props.role,
-        dates: []
+        dates: [],
+        checkedDates: {}
     }
 
     componentDidMount() {
-        console.log(this.state)
+        // console.log(this.state)
         if (this.state.user && this.state.role === "admin") {
             API.getUsers()
             .then(response => {
                 // insert scheduled array into the page 
                 let datesArr = []
+                let checkedDatesObj = this.state.checkedDates;
                 response.data.forEach(user => {
                     user.scheduled.forEach(scheduledDate => {
                         scheduledDate["name"] = user.username
-                        console.log("scheduledDate")
-                        console.log(scheduledDate)
+                        // console.log("scheduledDate");
+                        // console.log(scheduledDate);
                         datesArr.push(scheduledDate);
+                        checkedDatesObj[scheduledDate.date] = scheduledDate.approved
                     })
                 });
                 this.setState({
-                    dates: datesArr
+                    dates: datesArr,
+                    checkedDates: checkedDatesObj
                 })
             })
         } else if (this.state.user && this.state.role) {
@@ -47,7 +51,7 @@ class AccountPage extends Component {
             <div className="container mainContent">
                 <div className="center">
                     <h2>AccountPage</h2>
-                    <DatesTable dates={this.state.dates} role={this.props.role}/>
+                    <DatesTable dates={this.state.dates} role={this.state.role} checkedDates={this.state.checkedDates}/>
                 </div>
             </div>
         );
