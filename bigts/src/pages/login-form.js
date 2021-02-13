@@ -6,7 +6,8 @@ class LoginForm extends Component {
   state = {
     username: "",
     password: "",
-    redirectTo: null
+    redirectTo: null,
+    role: "user"
   };
 
   handleChange = event => {
@@ -17,10 +18,22 @@ class LoginForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const formData = {
-      username: this.state.username,
-      password: this.state.password
-    };
+
+    let formData = {};
+		if (this.state.username === "matttali09" || this.state.username === "tonytali") {
+			formData = {
+				username: this.state.username,
+				password: this.state.password,
+				role: 'admin'
+			};
+		} else {
+			formData = {
+				username: this.state.username,
+				password: this.state.password,
+				role: "user"
+			};
+		}
+
     API.signInUser(formData)
       .then(response => {
         if (response.status === 200) {
@@ -39,6 +52,7 @@ class LoginForm extends Component {
       .catch(error => {
         console.log("login error: ");
         console.log(error);
+        alert("password or username is incorrect")
       });
   };
 

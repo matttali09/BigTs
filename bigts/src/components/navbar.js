@@ -12,9 +12,7 @@ class Nav extends Component {
         M.Sidenav.init(sidenav, {});
     }
 
-    logout = event => {
-        event.preventDefault()
-
+    logout = () => {
         API.signOutUser().then(response => {
             if (response.status === 200) {
                 this.props.updateUser({
@@ -23,7 +21,8 @@ class Nav extends Component {
                 })
             }
         }).catch(error => {
-            console.log('Logout error')
+            console.log('Logout error');
+            console.log(error);
         })
     }
 

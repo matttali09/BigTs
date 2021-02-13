@@ -59,7 +59,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bigtsuserlist", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bigtsuserlist", 
+{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 // development and production errorhandling
 // app.configure('development', function(){

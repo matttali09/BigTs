@@ -20,6 +20,9 @@ function CalendarFun(props) {
   useEffect(() => {
     // code to run on component mount
     checkUserSchedule(null);
+    
+    // ignore missing dependency warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function onChange(nextValue) {

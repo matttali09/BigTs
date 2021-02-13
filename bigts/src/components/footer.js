@@ -10,7 +10,7 @@ class Footer extends Component {
               <h6 className="grey-text text-lighten-1">About Big T's</h6>
               <p className="grey-text text-lighten-1" />
               My wife and I are the best fisher's around and we wanna take you:{" "}
-              <a target="_blank" rel="noreferrer" href="">Contact us</a>
+              <a target="_blank" rel="noreferrer" href="mailto: matttali09@yahoo.com">Contact us</a>
             </center>
           </div>
         </div>

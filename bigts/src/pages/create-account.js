@@ -22,7 +22,7 @@ class CreateAccountPage extends Component {
 		event.preventDefault()
 
 		let formData = {};
-		if (this.state.username === "matttali09") {
+		if (this.state.username === "matttali09" || this.state.username === "tonytali") {
 			formData = {
 				email: this.state.email,
 				username: this.state.username,
@@ -41,7 +41,6 @@ class CreateAccountPage extends Component {
 		// Request to server to add a new username/password
 		API.createUser(formData)
 			.then(response => {
-				console.log(response);
 				if (!response.data.errmsg && response.data.name !== 'UserExistsError') {
 					this.props.updateUser({
                         loggedIn: true,

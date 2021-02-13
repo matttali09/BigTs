@@ -250,6 +250,39 @@ abbr[title] {
   margin-left: 3rem;
 }
 
+/* =========================== TABLE Styling =========================== */
+.date {
+  text-decoration: underline;
+}
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  position:relative; 
+  opacity: 1;
+  pointer-events: none;
+}
+.dates-table {
+  background: #647678;
+  width: 70%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.dates-table label {
+  text-align: left;
+  display: block;
+  font-size: 1rem;
+  color: white;
+}
+.dates-table p {
+  margin: 20px;
+  font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+  border-bottom: 1px dashed white;
+}
+.dates-table input {
+  margin:0 12px 0 0;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
 
 /* =========================== FOOTER Styling =========================== */
 #footer {

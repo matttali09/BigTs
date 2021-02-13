@@ -47,9 +47,9 @@ class App extends Component {
           />
           <Route path="/create-account" render={() => <CreateAccountPage updateUser={this.updateUser} />}
           />
-          <Route exact path="/scheduling" render={() => <Scheduling user={this.state.username}/>}
+          <Route exact path="/scheduling" render={() => <Scheduling user={this.state.username} role={this.state.role} />}
           />
-          <Route path="/account" render={() => <AccountPage user={this.state.username} />}
+          <Route path="/account" render={() => <AccountPage user={this.state.username} role={this.state.role} />}
           />
           <Route href="/*" component={NoMatch} />
         </Switch>
