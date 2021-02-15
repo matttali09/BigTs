@@ -17,8 +17,12 @@ class Nav extends Component {
             if (response.status === 200) {
                 this.props.updateUser({
                     loggedIn: false,
-                    username: null
+                    username: null,
+                    role: "user"
                 })
+                localStorage.user = null;
+                localStorage.role = null;
+                localStorage.loggedIn = false;
             }
         }).catch(error => {
             console.log('Logout error');

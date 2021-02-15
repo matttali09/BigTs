@@ -61,10 +61,15 @@ function CalendarFun(props) {
             }
             
             // should be without not when finished
-            if (!scheduledDate.approved && user.username === userName) {
+            if (scheduledDate.approved && user.username === userName) {
+              findElAndColor(scheduledDate.date, "green");
+            }
+            else if (!scheduledDate.approved && user.username === userName) {
               findElAndColor(scheduledDate.date, "yellow");
 
             } else if (!scheduledDate.approved) {
+              findElAndColor(scheduledDate.date, "red");
+            } else {
               findElAndColor(scheduledDate.date, "red");
             }
             

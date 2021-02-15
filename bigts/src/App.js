@@ -14,13 +14,16 @@ import NoMatch from './components/noMatch';
 
 class App extends Component {
   state = {
-    loggedIn: false,
-    username: null,
-    role: "user"
+    loggedIn: sessionStorage.loggedIn ? sessionStorage.loggedIn : false,
+    username: sessionStorage.user ? sessionStorage.user : null,
+    role: sessionStorage.role ? sessionStorage.role : "user"
   }
 
   updateUser = userObject => {
-    this.setState(userObject)
+    sessionStorage.loggedIn = userObject.loggedIn
+    sessionStorage.user = userObject.username
+    sessionStorage.role = userObject.role
+    this.setState(userObject);
   }
 
   render() {
@@ -43,13 +46,13 @@ class App extends Component {
           />
           <Route exact path="/home" render={() => <Home />}
           />
-          <Route path="/signin" render={() => <LoginForm updateUser={this.updateUser} />}
+          <Route exact path="/signin" render={() => <LoginForm updateUser={this.updateUser} />}
           />
-          <Route path="/create-account" render={() => <CreateAccountPage updateUser={this.updateUser} />}
+          <Route exact path="/create-account" render={() => <CreateAccountPage updateUser={this.updateUser} />}
           />
           <Route exact path="/scheduling" render={() => <Scheduling user={this.state.username} role={this.state.role} />}
           />
-          <Route path="/account" render={() => <AccountPage user={this.state.username} role={this.state.role} />}
+          <Route exact path="/account" render={() => <AccountPage user={this.state.username} role={this.state.role} />}
           />
           <Route href="/*" component={NoMatch} />
         </Switch>
