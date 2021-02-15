@@ -6,11 +6,20 @@ import MyModal from "../modal/modal.js";
 function CalendarFun(props) {
   // declare value hooks
   const [value, setValue] = useState(new Date());
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+  const [formatedDate, setFormatedDate] = useState("");
+  const [modalOptions, setModalOptions] = useState(false);
   // set modalMessage with hook and initialize variables for messages here for readability
-  const availableModalMessage = "The date you selected is available would you like to schedule it?";
-  const unavailableModalMessage = "The date you selected has already been scheduled by another user.";
-  const [modalMessage, setModalMessage] = React.useState(availableModalMessage);
+  const availableMessage = "The date you selected is available would you like to schedule it?";
+  const unavailableMessage = "The date you selected has already been scheduled by another user.";
+  const userDuplicateMessage = "You have already selected this date to be scheduled.";
+  const userDuplicateAcceptedMessage = "You have been approved for this date already!";
+  const adminDateApprovedMessage = "You have already approved this date.";
+  const adminDateUnapprovedMessage = "You have not approved this date yet.";
+  const adminDateNotScheduledMessage = "This date has not been scheduled by any user yet.";
+
+  const [modalMessage, setModalMessage] = React.useState(availableMessage);
 
   // declare variables and component reference
   const userName = props.user;
@@ -39,11 +48,11 @@ function CalendarFun(props) {
   }
 
   const checkUserSchedule = formatedValue => {
-    formatedValue ? setOpenModal(true) : setOpenModal(false);
-
     let duplicate = false;
     let userDuplicate = false;
-    let updatedDates;
+    let userDateAccepted = false;
+    let updatedDates = [];
+    let adminApproved = false;
 
     API.getUsers()
       .then(response => {
@@ -52,25 +61,52 @@ function CalendarFun(props) {
 
           user.scheduled.forEach(scheduledDate => {
             
-            if (user.name === userName && scheduledDate.date === formatedValue) {
-              duplicate = true;
-              userDuplicate = true;
+            // will run when formatedValue is present and determine which flags to set
+            if (formatedValue) {
+              if (user.username === userName && scheduledDate.date === formatedValue  && scheduledDate.approved) {
+                duplicate = true;
+                userDuplicate = true;
+                userDateAccepted = true;
 
-            } else if (scheduledDate.date === formatedValue) {
-              duplicate = true;
+              } else if (user.username === userName && scheduledDate.date === formatedValue) {
+                duplicate = true;
+                userDuplicate = true;
+
+              } else if (scheduledDate.date === formatedValue) {
+                duplicate = true;
+              }
             }
             
-            // should be without not when finished
-            if (scheduledDate.approved && user.username === userName) {
-              findElAndColor(scheduledDate.date, "green");
-            }
-            else if (!scheduledDate.approved && user.username === userName) {
-              findElAndColor(scheduledDate.date, "yellow");
+            // ========= determining how to paint each scheduled date for each user ======= 
+            // for admin
+            if (props.role === "admin") {
+              if (scheduledDate.approved && scheduledDate.date === formatedValue) {
+                adminApproved = true;
+                findElAndColor(scheduledDate.date, "green");
+              } else if (scheduledDate.approved ) {
+                findElAndColor(scheduledDate.date, "green");
+              } else {
+                findElAndColor(scheduledDate.date, "yellow");
+              }
 
-            } else if (!scheduledDate.approved) {
-              findElAndColor(scheduledDate.date, "red");
+              // for regular users
             } else {
-              findElAndColor(scheduledDate.date, "red");
+              // scheduled date for this user which has been approved
+              if (scheduledDate.approved && user.username === userName) {
+                findElAndColor(scheduledDate.date, "green");
+
+                // scheduled date for this user which has not been approved
+              } else if (!scheduledDate.approved && user.username === userName) {
+                findElAndColor(scheduledDate.date, "yellow");
+              
+                // scheduled date for a different user which has not been approved
+              } else if (!scheduledDate.approved) {
+                findElAndColor(scheduledDate.date, "red");
+
+                // scheduled date for different user which has not been approved
+              } else {
+                findElAndColor(scheduledDate.date, "red");
+              }
             }
             
           });
@@ -81,29 +117,58 @@ function CalendarFun(props) {
 
         });
 
-        if (!duplicate && !userDuplicate && formatedValue) {
-          // save user info with previous scheduled and current value
-          let userInfo = {username: userName, scheduled: updatedDates};
+        // if a date has been selected this will determine what modal to show
+        if (formatedValue) {
+          // logic switch for admin
+          if (props.role === "admin") {
+            if (duplicate && adminApproved) {
+              setModalMessage(adminDateApprovedMessage);
+              setModalOptions(false);
 
-          findElAndColor(formatedValue, "yellow");
+            } else if (duplicate) {
+              setModalMessage(adminDateUnapprovedMessage);
+              setModalOptions(false);
+            } else {
+              setModalMessage(adminDateNotScheduledMessage);
+              setModalOptions(false);
 
-          API.updateUser(userName, userInfo);
+            }
+          } else {
+            // if user has selected a date this will determine what to do next.
+            // duplicate for this user
+            if (duplicate && userDuplicate && userDateAccepted) {
+              setModalMessage(userDuplicateAcceptedMessage);
+              setModalOptions(false);
+              setUserInfo({});
 
-        } else if (!duplicate && formatedValue) {
+            // duplicate for this user, date is unavailable
+            } else if (duplicate && userDuplicate) {
+              setModalMessage(userDuplicateMessage);
+              setModalOptions(false);
+              setUserInfo({});
+            
+            // duplicate for other user, date is unavailable
+            } else if (duplicate) {
+              setModalMessage(unavailableMessage);
+              setModalOptions(false);
+              setUserInfo({});
+            
+            // not a duplicate, date is available.
+            } else {
+              setModalMessage(availableMessage);
+              setModalOptions(true);
 
-          // save user info with previous scheduled and current value
-          let userInfo = {username: userName, scheduled: {date: formatedValue, approved: false}}
+              setFormatedDate(formatedValue);
+              setUserInfo({username: userName, scheduled: updatedDates});
 
-          findElAndColor(formatedValue, "red");
-
-          API.updateUser(userName, userInfo);
-          
-        } else if (formatedValue) {
-          setModalMessage(unavailableModalMessage);
+            }
+          }
+          // after all checks for users open the modal if a date was selected
+          setOpenModal(true)
+        } else {
+          setOpenModal(false)
         }
-        
-      }
-      )
+      })
   }
 
   const findElAndColor = (date, color) => {
@@ -111,7 +176,7 @@ function CalendarFun(props) {
     if (element) {
       element.style.background = color;
     } else {
-      console.error("date not found;")
+      console.log("date not found;")
     }
   }
  
@@ -127,6 +192,10 @@ function CalendarFun(props) {
         <MyModal 
           message={modalMessage}
           closeModalHandler={setOpenModal}
+          userInfo={userInfo}
+          findElAndColor={findElAndColor}
+          formatedDate={formatedDate}
+          modalOptions={modalOptions}
         />
       }
     </div>

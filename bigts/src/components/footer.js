@@ -18,7 +18,7 @@ class Footer extends Component {
           <div className="container">
             <center>
               <p className="grey-text text-lighten-1">
-                Copyright © 2020 All rights reserved | Made
+                Copyright © 2021 All rights reserved | Made
                 with <i className="far fa-heart" aria-hidden="true" /> by <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/matthew-taliancich-718970168/">TalaHachi</a>
               </p>
             </center>

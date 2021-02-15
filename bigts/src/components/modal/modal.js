@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from 'react-modal';
+import API from "../../utils/API";
 
 const customStyles = {
   overlay: {
@@ -34,7 +35,11 @@ export default function MyModal(props) {
     subtitle.style.color = '#000';
   }
  
-  function closeModal(){
+  function closeModal(event){
+    if (event.target.className === "yes-btn") {
+      props.findElAndColor(props.formatedDate, "yellow");
+      API.updateUser(props.userInfo.username, props.userInfo);
+    }
     props.closeModalHandler(false);
     setIsOpen(false);
   }
@@ -53,8 +58,15 @@ export default function MyModal(props) {
           >
             <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello There!</h2>
             <div className="modal-text">{props.message}</div>
-            <button className="yes-btn" onClick={closeModal}>Yes!</button>
-            <button className="cancel-btn" onClick={closeModal}>Cancel</button>
+            {props.modalOptions ? (
+              <div>
+                <button className="yes-btn" onClick={closeModal}>Yes!</button>
+                <button className="cancel-btn" onClick={closeModal}>Cancel</button>
+              </div>
+            ) : (
+              <button style={{"marginLeft": "0"}} className="cancel-btn" onClick={closeModal}>Cancel</button>
+            )}
+            
           </Modal>
         </div>
       </div>
