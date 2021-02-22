@@ -130,7 +130,7 @@ main {
 }
 /* container styling */
 .mainContent {
-  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
   padding: 1em 1em 3em 1em; 
   width: 85%!important;
 }
