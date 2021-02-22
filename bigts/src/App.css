@@ -1,7 +1,11 @@
+html {
+  background-color: #2f3738;
+}
+
 body {
-  background: url("./images/The-Big-Ts-Boat.JPG")
-    no-repeat center center fixed;
-  background-size: cover;
+  background: url("./images/Red-Grouper.jpg")
+    no-repeat center fixed;
+  background-size: contain;
   color: white;
   font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
