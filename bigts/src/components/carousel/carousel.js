@@ -5,7 +5,7 @@ const Slider = ({props}) => (
     <AwesomeSlider cssModule={AwsSliderStyles}>
         <div data-src="../../images/Red-Grouper.jpg" />
         <div data-src="../../images/Black-Grouper.JPG" />
-        <div data-src="../../images/Wahoo.jpg" />
+        <div data-src="../../images/Wahoo.JPG" />
         <div data-src="../../images/Sail-Fish.JPG" />
         <div data-src="../../images/Mahi.jpg" />
     </AwesomeSlider>
