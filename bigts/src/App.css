@@ -3,10 +3,13 @@ body {
     no-repeat center center fixed;
   background-size: cover;
   color: white;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
 .center {
   text-align: center;
+}
+button, input, optgroup, select, textarea {
+  font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* =========================== NAV Styling =========================== */
@@ -308,11 +311,21 @@ footer i {
 }
 
 /* =========================== MEDIA Queryies =========================== */
-@media only screen and (min-width: 601px) {
-  /* .container {
-    width: 100%;
-  } */
+@media only screen and (max-width: 993px) {
+  .mainContent {
+    width: 100% !important;
+  }
+  .react-calendar__month-view__days button abbr {
+    padding-inline: 0.3rem;
+  }
+  .react-calendar__month-view__days button {
+    max-width: 100px;
+    min-height: 75px;
+    font-size: 1.5rem;
+  }
 }
+
+/* media queries for navbar buttons */
 @media only screen and (min-width: 993px) {
   .hide-on-large-and-up {
       display: none !important;
