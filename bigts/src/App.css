@@ -323,6 +323,12 @@ footer i {
     min-height: 75px;
     font-size: 1.5rem;
   }
+  input {
+    width: 17%;
+  }
+  .react-calendar__navigation .react-calendar__navigation__label {
+    font-size: 1.3rem;
+}
 }
 
 /* media queries for navbar buttons */
