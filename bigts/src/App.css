@@ -5,7 +5,7 @@ html {
 body {
   background: url("./images/Red-Grouper.jpg")
     no-repeat center fixed;
-  background-size: contain;
+  background-size: 100vh 100vh;
   color: white;
   font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
