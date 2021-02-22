@@ -23,7 +23,7 @@ class Home extends Component {
         </center>
         <Slider/>
         <center>
-            <h3>Plan Your Adventure Today!</h3>
+            <h3 style={{"marginTop": "80px"}}>Plan Your Adventure Today!</h3>
             <Link to="/scheduling" className="main-btn btn btn-link waves-effect center">
               <span className="black-txt">Schedule Your Adventure!</span>
             </Link>
