@@ -5,9 +5,21 @@ const passportLocalMongoose = require('passport-local-mongoose');
 
 
 const userSchema = new Schema({
-  email: String,
-  username: String,
-  password: String,
+  email: {
+    type: String,
+    lowercase: true, 
+    trim: true
+  },
+  username: {
+    type: String,
+    unique: true,
+    lowercase: true, 
+    trim: true
+  },
+  password: {
+    type: String,
+    trim: true
+  },
   scheduled: Array,
   role: String,
   date: { type: Date, default: Date.now }
