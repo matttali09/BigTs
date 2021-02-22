@@ -5,7 +5,7 @@ html {
 body {
   background: url("./images/Red-Grouper.jpg")
     no-repeat center fixed;
-  background-size: 100vh 100vh;
+  background-size: 60vw 100vh;
   color: white;
   font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -316,6 +316,9 @@ footer i {
 
 /* =========================== MEDIA Queryies =========================== */
 @media only screen and (max-width: 993px) {
+  body {
+    background-size: 100vw 100vh;
+  }
   .mainContent {
     width: 100% !important;
     padding: 0.2rem;
