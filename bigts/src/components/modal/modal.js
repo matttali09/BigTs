@@ -35,13 +35,15 @@ export default function MyModal(props) {
     subtitle.style.color = '#000';
   }
  
-  function closeModal(event){
-    if (event.target.className === "yes-btn") {
-      props.findElAndColor(props.formatedDate, "yellow");
-      API.updateUser(props.userInfo.username, props.userInfo);
-    }
+  function closeModal(){
     props.closeModalHandler(false);
     setIsOpen(false);
+  }
+
+  function scheduleAndCloseModal () {
+    props.findElAndColor(props.formatedDate, "yellow");
+    API.updateUser(props.userInfo.username, props.userInfo);
+    closeModal();
   }
  
     return (
@@ -60,7 +62,7 @@ export default function MyModal(props) {
             <div className="modal-text">{props.message}</div>
             {props.modalOptions ? (
               <div>
-                <button className="yes-btn" onClick={closeModal}>Yes!</button>
+                <button className="yes-btn" onClick={scheduleAndCloseModal}>Yes!</button>
                 <button className="cancel-btn" onClick={closeModal}>Cancel</button>
               </div>
             ) : (
