@@ -36,7 +36,6 @@ app.use(passport.initialize());
 
 // Static directory
 app.use(express.static("server-assets"));
-app.use(express.static("bigts/public"));
 
 // create static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
