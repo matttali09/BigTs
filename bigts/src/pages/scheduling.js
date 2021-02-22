@@ -10,7 +10,7 @@ class Scheduling extends Component {
         return (
             <div className="container mainContent">
                 <center>
-                    <h3 style={{"marginTop": "80px"}}>Plan Your Adventure Today!</h3>
+                    <h3>Plan Your Adventure Today!</h3>
                     <Calendar 
                     user={this.props.user}
                     role={this.props.role}
