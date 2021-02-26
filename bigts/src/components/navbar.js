@@ -20,9 +20,9 @@ class Nav extends Component {
                     username: null,
                     role: "user"
                 })
-                localStorage.user = null;
-                localStorage.role = null;
-                localStorage.loggedIn = false;
+                sessionStorage.user = null;
+                sessionStorage.role = "user";
+                sessionStorage.loggedIn = false;
             }
         }).catch(error => {
             console.log('Logout error');

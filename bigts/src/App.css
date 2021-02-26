@@ -290,6 +290,32 @@ abbr[title] {
   top: -1px;
 }
 
+.account-info-header {
+  padding-top: .5em;
+  border-top: 1px solid dodgerblue;
+}
+.account-info {
+  background: #647678;
+  width: 70%;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.row {
+  border-bottom: 1px dashed white;
+}
+.column {
+  float: left;
+  width: 50%;
+}
+.column span.column-label {
+  float: right;
+  padding-right: 2em;
+}
+.column span.column-info {
+  float: left;
+}
+
 /* =========================== FOOTER Styling =========================== */
 #footer {
   background-color: #647678;

@@ -29,6 +29,7 @@ module.exports = {
         // console.log('user signup');
         // console.log("req.body before signup" + JSON.stringify(req.body))
         User.register(new User({
+            email: req.body.email,
             username: req.body.username,
             name: req.body.name,
             role: req.body.role

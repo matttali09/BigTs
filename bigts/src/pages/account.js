@@ -6,6 +6,7 @@ class AccountPage extends Component {
     state = {
         user: this.props.user,
         role: this.props.role,
+        email: '',
         dates: [],
         checkedDates: {}
     }
@@ -35,9 +36,11 @@ class AccountPage extends Component {
         } else if (this.state.user && this.state.role) {
             API.getUser(this.state.user)
             .then(response => {
+                console.log(response);
                 // insert scheduled array into the page
                 this.setState({
-                    dates: response.data.scheduled
+                    dates: response.data.scheduled,
+                    email: response.data.email
                 })
             })
         } else {
@@ -50,8 +53,22 @@ class AccountPage extends Component {
         return (
             <div className="container mainContent">
                 <div className="center">
-                    <h2>AccountPage</h2>
-                    <DatesTable dates={this.state.dates} role={this.state.role} checkedDates={this.state.checkedDates}/>
+                    <h2>Scheduled Dates</h2>
+                    {!this.state.dates.length ? 
+                    <p>No dates have been scheduled yet.</p>
+                    : <DatesTable dates={this.state.dates} role={this.state.role} checkedDates={this.state.checkedDates}/>
+                    }
+                    <h2 className="account-info-header">Account Info</h2>
+                    <div className="account-info">
+                        <div className="row">
+                            <div className="column"><span className="column-label">UserName:</span></div>
+                            <div className="column"><span className="column-info">{this.state.user}</span></div>
+                        </div>
+                        <div className="row">
+                            <div className="column"><span className="column-label">Email:</span></div>
+                            <div className="column"><span className="column-info">{this.state.email}</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

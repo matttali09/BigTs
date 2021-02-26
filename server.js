@@ -62,7 +62,7 @@ passport.deserializeUser(User.deserializeUser());
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bigtsuserlist", 
 // {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://dbUser:CloudyDay8823@BigTs.1bjae.mongodb.net/BigTs?retryWrites=true&w=majority", 
-{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
 
 // development and production errorhandling
 // app.configure('development', function(){

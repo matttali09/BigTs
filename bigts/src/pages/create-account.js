@@ -18,8 +18,52 @@ class CreateAccountPage extends Component {
 		})
 	}
 
+	validateEmail(email) {
+		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
+	}
+	validateUserName() {
+		if (this.state.username) {
+			return true;
+		} else {
+			alert("username was empty");
+			return false;
+		}
+	}
+	validatePassword() {
+		if (this.state.password) {
+			return true;
+		} else {
+			alert("password was empty");
+			return false;
+		}
+	}
+
+	runValidation() {
+		let valid = true;
+		if(this.validateEmail(this.state.email)) {
+			// console.log("email validation passed");
+		} else {
+			alert("Please enter a valid email addressed");
+			valid = false;
+		}
+		if (this.validateUserName()) {
+			// console.log("username validation passed");
+		} else {
+			valid = false;
+		}
+		if (this.validatePassword()) {
+			// console.log("Password validation passed");
+		} else {
+			valid = false;
+		}
+		return valid
+	}
+
 	handleSubmit = event => {
-		event.preventDefault()
+		event.preventDefault();
+
+		if (this.runValidation()) {
 
 		let formData = {};
 		if (this.state.username === "matttali09" || this.state.username === "tonytali") {
@@ -37,10 +81,12 @@ class CreateAccountPage extends Component {
 				role: this.state.role
 			};
 		}
+		console.log(formData);
 		
 		// Request to server to add a new username/password
 		API.createUser(formData)
 			.then(response => {
+				console.log(response);
 				if (!response.data.errmsg && response.data.name !== 'UserExistsError') {
 					this.props.updateUser({
                         loggedIn: true,
@@ -58,6 +104,9 @@ class CreateAccountPage extends Component {
 				console.log(error);
 				alert("Unknown error occured during account creation.")
 			})
+		} else {
+			console.log("runValidation failed")
+		}
 	}
 
 

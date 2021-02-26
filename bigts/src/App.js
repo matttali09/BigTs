@@ -14,8 +14,8 @@ import NoMatch from './components/noMatch';
 
 class App extends Component {
   state = {
-    loggedIn: sessionStorage.loggedIn ? sessionStorage.loggedIn : false,
-    username: sessionStorage.user ? sessionStorage.user : null,
+    loggedIn: sessionStorage.loggedIn !== "false" ? sessionStorage.loggedIn : false,
+    username: sessionStorage.user !== "null" ? sessionStorage.user : null,
     role: sessionStorage.role ? sessionStorage.role : "user"
   }
 

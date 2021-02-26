@@ -77,7 +77,6 @@ const DatesTable = (props) => {
         <div className="dates-table">
             {props.role === "admin" ? (
                 <div className="styled-checkbox">
-                    <h4>Dates to be approved</h4> <br />
                     {checkboxes().map(item => (
                         <p key={item.key}>
                             <label key={item.key}>
@@ -93,7 +92,9 @@ const DatesTable = (props) => {
                     ))}
                 </div>
             ) : (
-                <div>{userDates}</div>
+                <div>
+                    <div>{userDates}</div>
+                </div>
             )}
         </div>
     );
