@@ -19,7 +19,7 @@ class LoginForm extends Component {
     event.preventDefault();
 
     let formData = {};
-		if (this.state.username === "matttali09" || this.state.username === "tonytali") {
+		if (this.state.username.toLowerCase() === "matttali09" || this.state.username.toLowerCase() === "tonytali") {
 			formData = {
 				username: this.state.username,
 				password: this.state.password,
