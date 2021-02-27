@@ -24,6 +24,7 @@ const API = {
     return axios.post("/api/users/signup", userData);
   },
   signInUser: function(userData) {
+    console.log("THIS RAN")
     return axios.post("/api/users/signin", userData);
   },
   signOutUser: function() {

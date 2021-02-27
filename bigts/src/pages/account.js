@@ -1,24 +1,37 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import API from '../utils/API.js'
 import DatesTable from '../components/table/dates-table.js'
+import PasswordModal from '../components/modal/password-modal.js'
 
-class AccountPage extends Component {
-    state = {
-        user: this.props.user,
-        role: this.props.role,
-        email: '',
-        dates: [],
-        checkedDates: {}
-    }
+export default function AccountPage(props) {
+    // state = {
+    //     user: this.props.user,
+    //     role: this.props.role,
+    //     email: '',
+    //     dates: [],
+    //     checkedDates: {},
+    //     openModal: false,
+    //     modalMessage: "HELLO THERE"
+    // }
+    
+    const userName = props.user;
+    const role = props.role;
+    const [email, setEmail] = useState([]);
+    const [dates, setDates] = useState([]);
+    const [checkedDates, setCheckedDates] = useState({});
 
-    componentDidMount() {
+    const passwordMessage = "So u wanna change your password huh?"
+    const [openModal, setOpenModal] = useState(false);
+    const [modalMessage, setModalMessage] = React.useState(passwordMessage);
+
+    useEffect(() => {
         // console.log(this.state)
-        if (this.state.user && this.state.role === "admin") {
+        if (userName && role === "admin") {
             API.getUsers()
             .then(response => {
                 // insert scheduled array into the page 
                 let datesArr = []
-                let checkedDatesObj = this.state.checkedDates;
+                let checkedDatesObj = checkedDates;
                 response.data.forEach(user => {
                     user.scheduled.forEach(scheduledDate => {
                         scheduledDate["name"] = user.username
@@ -28,52 +41,59 @@ class AccountPage extends Component {
                         checkedDatesObj[scheduledDate.date] = scheduledDate.approved
                     })
                 });
-                this.setState({
-                    dates: datesArr,
-                    checkedDates: checkedDatesObj
-                })
+                setDates(datesArr);
+                setCheckedDates(checkedDatesObj);
             })
-        } else if (this.state.user && this.state.role) {
-            API.getUser(this.state.user)
+        } else if (userName && role) {
+            API.getUser(userName)
             .then(response => {
                 console.log(response);
                 // insert scheduled array into the page
-                this.setState({
-                    dates: response.data.scheduled,
-                    email: response.data.email
-                })
+                setDates(response.data.scheduled);
+                setEmail(response.data.email)
             })
         } else {
             console.log("No User signed in.")
         }
-    }
+    }, [checkedDates, role, userName]);
 
-    render() {
-
-        return (
-            <div className="container mainContent">
-                <div className="center">
-                    <h2>Scheduled Dates</h2>
-                    {!this.state.dates.length ? 
-                    <p>No dates have been scheduled yet.</p>
-                    : <DatesTable dates={this.state.dates} role={this.state.role} checkedDates={this.state.checkedDates}/>
-                    }
-                    <h2 className="account-info-header">Account Info</h2>
-                    <div className="account-info">
-                        <div className="row">
-                            <div className="column"><span className="column-label">UserName:</span></div>
-                            <div className="column"><span className="column-info">{this.state.user}</span></div>
-                        </div>
-                        <div className="row">
-                            <div className="column"><span className="column-label">Email:</span></div>
-                            <div className="column"><span className="column-info">{this.state.email}</span></div>
+    return (
+        <div className="container mainContent">
+            <div className="center">
+                <h2>Scheduled Dates</h2>
+                {!dates.length ? 
+                <p>No dates have been scheduled yet.</p>
+                : <DatesTable dates={dates} role={role} checkedDates={checkedDates}/>
+                }
+                <h2 className="account-info-header">Account Info</h2>
+                <div className="account-info">
+                    <div className="row">
+                        <div className="column"><span className="column-label">UserName:</span></div>
+                        <div className="column"><span className="column-info">{userName}</span></div>
+                    </div>
+                    <div className="row">
+                        <div className="column"><span className="column-label">Email:</span></div>
+                        <div className="column"><span className="column-info">{email}</span></div>
+                    </div>
+                    <div className="row">
+                        <div className="column"><span className="column-label">Role:</span></div>
+                        <div className="column"><span className="column-info">{role}</span></div>
+                    </div>
+                    <div className="row">
+                        <div className="column"><span className="column-label">Password:</span></div>
+                        <div className="column">
+                            <span className="column-info"> <button className="btn waves-effect" onClick={setOpenModal}>Change Password</button> </span>
                         </div>
                     </div>
                 </div>
+                {openModal &&
+                    <PasswordModal 
+                    message={modalMessage}
+                    closeModalHandler={setOpenModal}
+                    userInfo={userName}
+                    />
+                }
             </div>
-        );
-    
-    }
+        </div>
+    );
 }
-
-export default AccountPage;

@@ -66,10 +66,39 @@ module.exports = {
 
 
     update: function (req, res) {
-        User
-            .findOneAndUpdate({username: req.params.username }, req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+        console.log(req.body);
+        console.log(req.body.oldpassword);
+        console.log(req.body.password);
+        if (req.body.password) {
+            User.findByUsername(req.params.username).then(function(sanitizedUser){
+                if (sanitizedUser){
+                    console.log("THIS RAN")
+                    sanitizedUser.changePassword(req.body.oldpassword, req.body.password, function(err) {
+                        console.log("THIS RAN2")
+                        console.log("err")
+                        console.log(err)
+                        if(err) {
+                                 if(err.name === 'IncorrectPasswordError'){
+                                      res.json({ success: false, message: 'Incorrect password' }); // Return error
+                                 }else {
+                                     res.json({ success: false, message: 'Something went wrong!! Please try again.' });
+                                 }
+                       } else {
+                         res.json({ success: true, message: 'Your password has been changed successfully' });
+                        }
+                      })
+                } else {
+                    res.status(500).json({message: 'This user does not exist'});
+                }
+            },function(err){
+                console.error(err);
+            })
+        } else {
+            User
+                .findOneAndUpdate({username: req.params.username }, req.body)
+                .then(dbModel => res.json(dbModel))
+                .catch(err => res.status(422).json(err));
+        }
     },
     // not going to be used yet, but here for later
     remove: function (req, res) {

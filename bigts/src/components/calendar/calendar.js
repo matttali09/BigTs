@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import API from '../../utils/API.js';
-import MyModal from "../modal/modal.js";
+import SchedulingModal from "../modal/scheduling-modal.js";
  
 function CalendarFun(props) {
   // declare value hooks
@@ -189,7 +189,7 @@ function CalendarFun(props) {
       />
 
       {openModal &&
-        <MyModal 
+        <SchedulingModal 
           message={modalMessage}
           closeModalHandler={setOpenModal}
           userInfo={userInfo}

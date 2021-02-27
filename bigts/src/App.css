@@ -315,6 +315,16 @@ abbr[title] {
 .column span.column-info {
   float: left;
 }
+.column .btn {
+  margin-bottom: 20px;
+}
+
+.change-password-form {
+  background: white;
+}
+.change-password-form label, .change-password-form input {
+  color: black;
+}
 
 /* =========================== FOOTER Styling =========================== */
 #footer {

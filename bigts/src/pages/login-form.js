@@ -36,6 +36,8 @@ class LoginForm extends Component {
 
     API.signInUser(formData)
       .then(response => {
+        console.log("response");
+        console.log(response);
         if (response.status === 200) {
           // update App.js state
           this.props.updateUser({
@@ -52,7 +54,11 @@ class LoginForm extends Component {
       .catch(error => {
         console.log("login error: ");
         console.log(error);
-        alert("password or username is incorrect")
+        if (error.message.includes("500")) {
+          alert("500 error you may not be connected to the internet")
+        } else {
+          alert("password or username is incorrect");
+        }
       });
   };
 
