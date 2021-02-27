@@ -16,7 +16,7 @@ class App extends Component {
   state = {
     loggedIn: sessionStorage.loggedIn !== "false" ? sessionStorage.loggedIn : false,
     username: sessionStorage.user !== "null" ? sessionStorage.user : null,
-    role: sessionStorage.role ? sessionStorage.role : "user"
+    role: sessionStorage.role ? sessionStorage.role : "admin"
   }
 
   updateUser = userObject => {
