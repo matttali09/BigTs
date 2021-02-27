@@ -64,11 +64,11 @@ export default function MyModal(props) {
             return false;
           } 
         } else {
-          alert("New password fiels must match")
+          alert("New password fields must match.")
           return false;
         }
       } else {
-        alert("please fill out all fields")
+        alert("Please fill out all fields.")
         return false;
       }
     }
