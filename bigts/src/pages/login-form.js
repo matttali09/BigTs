@@ -7,7 +7,6 @@ class LoginForm extends Component {
     username: "",
     password: "",
     redirectTo: null,
-    role: "user"
   };
 
   handleChange = event => {
