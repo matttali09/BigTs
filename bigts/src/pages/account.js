@@ -4,18 +4,9 @@ import DatesTable from '../components/table/dates-table.js'
 import PasswordModal from '../components/modal/password-modal.js'
 
 export default function AccountPage(props) {
-    // state = {
-    //     user: this.props.user,
-    //     role: this.props.role,
-    //     email: '',
-    //     dates: [],
-    //     checkedDates: {},
-    //     openModal: false,
-    //     modalMessage: "HELLO THERE"
-    // }
     
     const userName = props.user;
-    const role = props.role;
+    const role = "admin";
     const [email, setEmail] = useState([]);
     const [dates, setDates] = useState([]);
     const [checkedDates, setCheckedDates] = useState({});
