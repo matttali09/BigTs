@@ -8,7 +8,6 @@ class CreateAccountPage extends Component {
 		username: '',
 		password: '',
 		confirmPassword: '', // not being used;
-		role: 'user',
 		redirectTo: null
 	}
 	
@@ -78,7 +77,7 @@ class CreateAccountPage extends Component {
 				email: this.state.email,
 				username: this.state.username,
 				password: this.state.password,
-				role: this.state.role
+				role: "user"
 			};
 		}
 		console.log(formData);

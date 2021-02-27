@@ -69,34 +69,34 @@ class Nav extends Component {
                     <ul id="slide-out" className="sidenav">
                         {loggedIn ? (
                             <>
-                                <Link to="/home" className="waves-effect">
+                                <Link to="/home" className="waves-effect sidenav-close">
                                     <div className="cursive">Big T's</div>
                                 </Link>
-                                <Link to="/scheduling" className="waves-effect">
+                                <Link to="/scheduling" className="waves-effect sidenav-close">
                                     <span>Scheduling</span>
                                 </Link>
-                                <Link to="/account" className="waves-effect">
+                                <Link to="/account" className="waves-effect sidenav-close">
                                     <span>Account</span>
                                 </Link>
-                                <Link to="/signin" className="waves-effect" onClick={this.logout}>
+                                <Link to="/signin" className="waves-effect sidenav-close" onClick={this.logout}>
                                     <span>Logout</span>
                                 </Link>
-                                <div className="waves-effect sidenav-close" onClick={this.closeSidenav}>
+                                <div className="waves-effect sidenav-close">
                                     <i className="fas fa-arrow-circle-right"></i>
                                 </div>
                             </>
                         ) : (
                             <>
-                                <Link to="/home" className="waves-effect">
+                                <Link to="/home" className="waves-effect sidenav-close">
                                     <div className="cursive">Big T's</div>
                                 </Link>
-                                <Link to="/create-account" className="waves-effect">
+                                <Link to="/create-account" className="waves-effect sidenav-close">
                                     <span>Create Account</span>
                                 </Link>
-                                <Link to="/signin" className="waves-effect">
+                                <Link to="/signin" className="waves-effect sidenav-close">
                                     <span>Login</span>
                                 </Link>
-                                <div className="waves-effect sidenav-close" onClick={this.closeSidenav}>
+                                <div className="waves-effect sidenav-close">
                                     <i className="fas fa-arrow-circle-right"></i>
                                 </div>
                             </>
