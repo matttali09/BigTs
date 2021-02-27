@@ -6,7 +6,7 @@ import PasswordModal from '../components/modal/password-modal.js'
 export default function AccountPage(props) {
     
     const userName = props.user;
-    const role = "admin";
+    const role = props.role;
     const [email, setEmail] = useState([]);
     const [dates, setDates] = useState([]);
     const [checkedDates, setCheckedDates] = useState({});
