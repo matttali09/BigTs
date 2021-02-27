@@ -29,6 +29,8 @@ export default function AccountPage(props) {
         if (userName && role === "admin") {
             API.getUsers()
             .then(response => {
+                console.log("response")
+                console.log(response)
                 // insert scheduled array into the page 
                 let datesArr = []
                 let checkedDatesObj = checkedDates;
@@ -43,6 +45,12 @@ export default function AccountPage(props) {
                 });
                 setDates(datesArr);
                 setCheckedDates(checkedDatesObj);
+            })
+            API.getUser(userName)
+            .then(response => {
+                console.log(response);
+                // insert scheduled array into the page
+                setEmail(response.data.email)
             })
         } else if (userName && role) {
             API.getUser(userName)
