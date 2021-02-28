@@ -39,7 +39,7 @@ export default function MyModal(props) {
     }
    
     function closeModal(){
-      console.log(props.userInfo)
+      // console.log(props.userInfo)
       props.closeModalHandler(false);
       setIsOpen(false);
     }
@@ -47,7 +47,7 @@ export default function MyModal(props) {
     function scheduleAndCloseModal () {
       if (validateFields()) {
         API.updateUser(props.userInfo, {password: newPassword, oldpassword: confirmPassword}).then(response => {
-          console.log(response)
+          // console.log(response)
           alert(response.data.message)
         });
       }

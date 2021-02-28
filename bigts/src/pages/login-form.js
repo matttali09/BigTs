@@ -35,8 +35,8 @@ class LoginForm extends Component {
 
     API.signInUser(formData)
       .then(response => {
-        console.log("response");
-        console.log(response);
+        // console.log("response");
+        // console.log(response);
         if (response.status === 200) {
           // update App.js state
           this.props.updateUser({

@@ -22,7 +22,7 @@ function CalendarFun(props) {
   const [modalMessage, setModalMessage] = React.useState(availableMessage);
 
   // declare variables and component reference
-  const userName = props.user;
+  const userName = props.user.toLowerCase();
   const componentRef = useRef(null);
 
   // component did mount equivalent for function components hook

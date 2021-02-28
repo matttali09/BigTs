@@ -20,8 +20,8 @@ export default function AccountPage(props) {
         if (userName && role === "admin") {
             API.getUsers()
             .then(response => {
-                console.log("response")
-                console.log(response)
+                // console.log("response");
+                // console.log(response);
                 // insert scheduled array into the page 
                 let datesArr = []
                 let checkedDatesObj = checkedDates;
@@ -34,7 +34,12 @@ export default function AccountPage(props) {
                         checkedDatesObj[scheduledDate.date] = scheduledDate.approved
                     })
                 });
-                setDates(datesArr);
+                let sortedDatesArr = sortScheduledDates(datesArr);
+                // console.log("checkedDatesObj:");
+                // console.log(checkedDatesObj);
+                // console.log("sortedDates:");
+                // console.log(sortedDatesArr);
+                setDates(sortedDatesArr);
                 setCheckedDates(checkedDatesObj);
             })
             API.getUser(userName)
@@ -46,15 +51,37 @@ export default function AccountPage(props) {
         } else if (userName && role) {
             API.getUser(userName)
             .then(response => {
-                console.log(response);
+                // console.log("response");
+                // console.log(response);
                 // insert scheduled array into the page
-                setDates(response.data.scheduled);
-                setEmail(response.data.email)
+                let newArrayMapped = sortScheduledDates(response.data.scheduled);
+                setDates(newArrayMapped);
+                setEmail(response.data.email);
             })
         } else {
             console.log("No User signed in.")
         }
     }, [checkedDates, role, userName]);
+
+    // function to take an array of date objects and sort them based off date attribute
+    function sortScheduledDates(scheduled) {
+        let newDateArr = [];
+        // console.log(scheduled);
+        scheduled.forEach(dateObj => {
+            let newFormat = dateObj
+            newFormat["date"] = new Date(dateObj.date)
+            newDateArr.push(newFormat);
+        })
+        let newDateArrSorted = newDateArr.sort(function (a, b) {
+            return (a.date > b.date) - (a.date < b.date);
+        });
+        let newArrayMapped = newDateArrSorted.map(dateObj => {
+            dateObj["date"] = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(dateObj.date)
+            return dateObj;
+        })
+        // console.log(newArrayMapped);
+        return newArrayMapped;
+    }
 
     return (
         <div className="container mainContent">

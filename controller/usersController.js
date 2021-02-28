@@ -66,17 +66,17 @@ module.exports = {
 
 
     update: function (req, res) {
-        console.log(req.body);
-        console.log(req.body.oldpassword);
-        console.log(req.body.password);
+        // console.log(req.body);
+        // console.log(req.body.oldpassword);
+        // console.log(req.body.password);
         if (req.body.password) {
             User.findByUsername(req.params.username).then(function(sanitizedUser){
                 if (sanitizedUser){
-                    console.log("THIS RAN")
+                    // console.log("THIS RAN")
                     sanitizedUser.changePassword(req.body.oldpassword, req.body.password, function(err) {
-                        console.log("THIS RAN2")
-                        console.log("err")
-                        console.log(err)
+                        // console.log("THIS RAN2")
+                        // console.log("err")
+                        // console.log(err)
                         if(err) {
                                  if(err.name === 'IncorrectPasswordError'){
                                       res.json({ success: false, message: 'Incorrect password' }); // Return error
