@@ -65,7 +65,7 @@ class CreateAccountPage extends Component {
 		if (this.runValidation()) {
 
 		let formData = {};
-		if (this.state.username.toLowerCase() === "matttali09" || this.state.username.toLowerCase() === "tonytali") {
+		if (this.state.username.toLowerCase().trim() === "matttali09" || this.state.username.toLowerCase().trim() === "tonytali") {
 			formData = {
 				email: this.state.email,
 				username: this.state.username,
