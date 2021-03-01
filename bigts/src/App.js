@@ -8,6 +8,7 @@ import LoginForm from './pages/login-form';
 import AccountPage from './pages/account';
 import Home from './pages/home';
 import Scheduling from './pages/scheduling';
+import RatesPage from './pages/rates';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import NoMatch from './components/noMatch';
@@ -53,6 +54,8 @@ class App extends Component {
           <Route exact path="/scheduling" render={() => <Scheduling user={this.state.username} role={this.state.role} />}
           />
           <Route exact path="/account" render={() => <AccountPage user={this.state.username} role={this.state.role} />}
+          />
+          <Route exact path="/rates" render={() => <RatesPage user={this.state.username} role={this.state.role} />}
           />
           <Route href="/*" component={NoMatch} />
         </Switch>

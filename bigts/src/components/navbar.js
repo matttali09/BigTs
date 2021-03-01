@@ -48,6 +48,9 @@ class Nav extends Component {
                             <Link to="/account" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Account</span>
                             </Link>
+                            <Link to="/rates" className="btn btn-link waves-effect text-secondary center">
+                                <span className="text-secondary">Rates</span>
+                            </Link>
                             <Link to="/scheduling" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Scheduling</span>
                             </Link>
@@ -74,6 +77,9 @@ class Nav extends Component {
                                 </Link>
                                 <Link to="/scheduling" className="waves-effect sidenav-close">
                                     <span>Scheduling</span>
+                                </Link>
+                                <Link to="/rates" className="waves-effect sidenav-close">
+                                    <span>Rates</span>
                                 </Link>
                                 <Link to="/account" className="waves-effect sidenav-close">
                                     <span>Account</span>
