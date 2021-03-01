@@ -5,7 +5,7 @@ html {
 body {
   background: url("./images/Red-Grouper.jpg")
     no-repeat center fixed;
-    background-size: cover;
+  background-size: 100vw 100vh;
   color: white;
   font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -399,7 +399,7 @@ footer i {
 /* =========================== MEDIA Queryies =========================== */
 @media only screen and (max-width: 993px) {
   body {
-    background-size: 100vw 100vh;
+    background-size: cover;
   }
   .mainContent {
     width: 100% !important;
@@ -418,7 +418,10 @@ footer i {
   }
   .react-calendar__navigation .react-calendar__navigation__label {
     font-size: 1.3rem;
-}
+  }
+  .rates-section, .account-info, .dates-table {
+    width: 95%
+  }
 }
 
 /* media queries for navbar buttons */
