@@ -306,6 +306,7 @@ abbr[title] {
 }
 .row {
   border-bottom: 1px dashed white;
+  border-radius: 3%;
 }
 .column {
   float: left;
@@ -332,13 +333,18 @@ abbr[title] {
 /* =========================== RATES PAGE STYLING =========================== */
 
 .rates-section {
-  background: #515d60d6;
   width: 70%;
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
+.card {
+  border: 1px solid aqua;
+  padding: 1rem;
+  background-color: #515d6099;
+  border-radius: 18%;
+}
 .img-wrap {
   margin: auto;
   border-style: solid;
@@ -366,12 +372,16 @@ abbr[title] {
   width: 9rem;
   top: 0.7rem;
   right: 0.7rem;
+  cursor: pointer;
 }
 .half-day-img:focus {
   height:9rem;
   width: 9rem;
   top: 0.7rem;
   right: 0.7rem;
+}
+.btn-wrap {
+  margin-bottom: 2rem;
 }
 /* =========================== FOOTER Styling =========================== */
 #footer {

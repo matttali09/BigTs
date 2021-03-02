@@ -179,6 +179,11 @@ function CalendarFun(props) {
       console.log("date not found;")
     }
   }
+
+  const handleCalendarClick = () => {
+    const reactCalendar = componentRef.current.querySelector(`.react-calendar'`);
+    reactCalendar.onClick()
+  }
  
   return (
     <div ref={componentRef}>
