@@ -142,7 +142,7 @@ main {
 .mainContent {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
   padding: 1em 1em 3em 1em;
-  margin-top: 5em;
+  margin-top: 2em;
   width: 85% !important;
 }
 .form-container {
@@ -465,7 +465,7 @@ footer i {
   .mainContent {
     width: 100% !important;
     padding: 0.2rem;
-    margin-top: 2em;
+    margin-top: 5em;
   }
   .react-calendar__month-view__days button abbr {
     padding-inline: 0.3rem;
