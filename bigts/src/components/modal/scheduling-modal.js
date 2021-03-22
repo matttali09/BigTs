@@ -86,7 +86,7 @@ export default function MyModal(props) {
             ariaHideApp={false}
             closeTimeoutMS={250}
           >
-            <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello There!</h2>
+            <h2 ref={_subtitle => (subtitle = _subtitle)}>Sounds Great!</h2>
             
             <div className="modal-text">{props.message}</div>
             {props.message === "Go Ahead and Pick your date now!"  && 
