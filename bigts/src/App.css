@@ -77,9 +77,9 @@ nav .btn-link.sidenav-trigger{
   width: 100%;
 }
 nav .brand:active {
-  background: #2bbbad!important;
+  background: #2bbbad !important;
 }nav .brand:focus {
-  background: #2bbbad!important;
+  background: #2bbbad !important;
 }
 .btn i {
   font-size: 141%;
@@ -116,6 +116,15 @@ nav .brand:active {
   margin-right: 10%;
   color: rgba(255, 255, 255, 0.8);
 }
+.ReactModal__Content {
+  border: 10px SOLID red !important;
+  border-radius: 50% !important;
+  animation: 3s ease-in 1s reverse both paused slidein !important;
+}
+.ReactModal__Content:hover {
+  border: 3px SOLID blue !important;
+  border-radius: 50% !important;
+}
 
 /* =========================== LOGIN styling =========================== */
 input {
@@ -126,20 +135,22 @@ input {
 }
 /* main tag */
 main {
-  min-height: 70vh!important;
+  min-height: 70vh !important;
 }
 /* container styling */
 .mainContent {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
   padding: 1em 1em 3em 1em;
   margin-top: 5em;
-  width: 85%!important;
+  width: 85% !important;
 }
 .form-container {
-  width: 100%!important;
+  width: 100% !important;
+}
+h2, h6 {
+  color: gold !important;
 }
 h6 {
-  color: white;
   background-color: #647678;
   padding: 0.75em 0.75em 0.75em 0.75em;
   width: 85%;
@@ -247,16 +258,21 @@ abbr[title] {
   color: #0095ff;
   margin-bottom: 3rem;
 }
-
+.schedule-btns {
+  color: white;
+}
 .yes-btn {
   font-size: 1.5rem;
   background-color: lawngreen;
-  margin-right: 3rem;
+  margin-right: -1rem;
+  border-radius: 50%;
 }
 .cancel-btn {
   font-size: 1.5rem;
-  background: #f44336;
+  background: orangered;
   margin-left: 3rem;
+  border-radius: 68%;
+  font-size: 22px;
 }
 
 /* =========================== TABLE Styling =========================== */
@@ -332,15 +348,24 @@ abbr[title] {
 
 /* =========================== RATES PAGE STYLING =========================== */
 
+.rates-page {
+  max-width: 100%;
+}
+.rates-page .container {
+  max-width: 100%;
+  width: 95% !important;
+}
 .rates-section {
-  width: 70%;
+  width: 95%;
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 .card {
+  display: inline-block;
   border: 1px solid aqua;
+  margin: .5rem 2.5rem 1rem 2.5rem;
   padding: 1rem;
   background-color: #515d6099;
   border-radius: 18%;
@@ -366,6 +391,7 @@ abbr[title] {
   position: absolute;
   top: 0.25rem;
   right: 0.3rem;
+  transition: ease 0.3s;
 }
 .half-day-img:hover {
   height:9rem;
@@ -382,6 +408,25 @@ abbr[title] {
 }
 .btn-wrap {
   margin-bottom: 2rem;
+}
+input[type="date"] {
+  background: yellowgreen;
+  border-radius: 50%;
+  font-size: x-small;
+  align-content: center;
+  text-align-last: center;
+  color: #80008052;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+  width: 20px;
+  height: 20px;
+  border-width: thin;
+  margin-right: 1rem;
+  font-size: 50%;
 }
 /* =========================== FOOTER Styling =========================== */
 #footer {
@@ -447,3 +492,30 @@ footer i {
 }
 
 
+
+
+/* ===============================    MISC STILL FIGURING OUT WHERE TO PLACE ========================================== */
+/* const customStyles = {
+  overlay: {
+    zIndex:  '100',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+  },
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    background            : 'darkgrey',
+    animation             : 'fadeIn ease 10s',
+    textAlign             : 'center',
+    animation             : 'fadeOut ease 60s'
+  }
+}; */
+/* =========================== MODAL STYLING ================================== */

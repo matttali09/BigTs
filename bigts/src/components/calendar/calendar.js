@@ -22,7 +22,7 @@ function CalendarFun(props) {
   const [modalMessage, setModalMessage] = React.useState(availableMessage);
 
   // declare variables and component reference
-  const userName = props.user.toLowerCase();
+  const userName = props.user;
   const componentRef = useRef(null);
 
   // component did mount equivalent for function components hook
@@ -164,9 +164,9 @@ function CalendarFun(props) {
             }
           }
           // after all checks for users open the modal if a date was selected
-          setOpenModal(true)
+          setOpenModal(true);
         } else {
-          setOpenModal(false)
+          setOpenModal(false);
         }
       })
   }
@@ -176,7 +176,7 @@ function CalendarFun(props) {
     if (element) {
       element.style.background = color;
     } else {
-      console.log("date not found;")
+      console.log("date not found;");
     }
   }
 
