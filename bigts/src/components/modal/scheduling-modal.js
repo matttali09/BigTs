@@ -31,7 +31,8 @@ export default function MyModal(props) {
 
   const [modalIsOpen,setIsOpen] = React.useState(true);
   const [doubleClick, setDoubleClick] = React.useState(false);
-  const [modalOptions, setModalOptions] = React.useState(false);
+  const [modalOptions, setModalOptions] = React.useState(true);
+  const [formatedDate, setFormatedDate] = React.useState(true);
 
   const [userInfo, setUserInfo] = React.useState(false);
   const [modalMessage, setModalMessage] = React.useState(false);
@@ -76,6 +77,18 @@ export default function MyModal(props) {
     } else {
 
       console.log("THIS RAN6")
+      API.getUser(userName).then(response => {
+        console.log(response.data.scheduled)
+        let userData = response.data.scheduled;
+        userData.push({date: formatedDate, approved: true, username: userName, typeKey: "EO"})
+        console.log("userData")
+        console.log(userData)
+        API.updateUser(userName, {scheduled: userData}).then(response => {
+          console.log("response")
+          console.log(response)
+        })
+      })
+
     }
     
     closeModal();
@@ -93,6 +106,7 @@ export default function MyModal(props) {
     console.log("userInfo");
     console.log(userInfo);
 
+    setFormatedDate(formatedValue)
     checkUserSchedule(formatedValue);
   }
 
@@ -150,6 +164,7 @@ export default function MyModal(props) {
       } else if (formatedValue) {
         console.log("Date before today")
         setModalMessage("BUT THE DATE SELECTED IS BEFORE TODAY");
+        setModalOptions(false);
       }
     })
   }
@@ -180,18 +195,22 @@ export default function MyModal(props) {
         if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
           // message for approved date selected same user
           setModalMessage("You Have Already Been Approved for This Date.")
+          setModalOptions(false);
           break;
         } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
           // message for not approved selected same user
           setModalMessage("You have Not Been Approved for This Date.")
+          setModalOptions(false);
           break;
         } else if (formatedDate === scheduledDate.date) {
           // message for scheduledDate selected not same user
           setModalMessage("This Date is Already Scheduled for Another User.")
+          setModalOptions(false);
           break;
         } else {
           // message for day available
           setModalMessage("Great Just Confirm Your Adventure Now!")
+          setModalOptions(true);
         }
       }
     }
@@ -218,7 +237,7 @@ export default function MyModal(props) {
             {modalMessage  && 
               <div className="modal-text">{modalMessage}</div>
             }
-            {props.modalOptions && !modalOptions ? (
+            {props.modalOptions && modalOptions ? (
               <div className="schedule-btns">
                 <button className="yes-btn" onClick={scheduleAndCloseModal}>Confirm!</button>
                 <button className="cancel-btn" onClick={closeModal}>Cancel</button>
