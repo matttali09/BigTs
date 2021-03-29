@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import API from "../utils/API";
 
 class LoginForm extends Component {
@@ -112,12 +112,15 @@ class LoginForm extends Component {
               <div className="form-group ">
                 <div className="col-7" />
                 <button
-                  className="btn btn-primary col-1 col-mr-auto"
+                  className="btn btn-primary col-1 col-mr-auto login-btn"
                   onClick={this.handleSubmit}
                   type="submit"
                 >
                   Login
                 </button>
+                <Link to="/create-account" className="center signin-nav">
+                  <span>Don't have an Account Yet?</span>
+                </Link>
               </div>
             </form>
           </center>

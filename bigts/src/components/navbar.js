@@ -54,6 +54,12 @@ class Nav extends Component {
                             <Link to="/scheduling" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Scheduling</span>
                             </Link>
+                            <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
+                                <span className="text-secondary">The Boat</span>
+                            </Link>
+                            <Link to="/captn" className="btn btn-link waves-effect text-secondary center">
+                                <span className="text-secondary">The Capt'n</span>
+                            </Link>
                         </div>
                     ) : (
                             <div className="hide-on-med-and-down">
@@ -74,6 +80,12 @@ class Nav extends Component {
                             <>
                                 <Link to="/home" className="waves-effect sidenav-close">
                                     <div className="cursive">Big T's</div>
+                                </Link>
+                                <Link to="/boat" className="waves-effect sidenav-close">
+                                    <span>The Boat</span>
+                                </Link>
+                                <Link to="/captn" className="waves-effect sidenav-close">
+                                    <span>The Captn</span>
                                 </Link>
                                 <Link to="/scheduling" className="waves-effect sidenav-close">
                                     <span>Scheduling</span>

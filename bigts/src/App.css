@@ -39,7 +39,7 @@ nav .brand a {
 }
 .main-btn {
   height: 4rem;
-  background: aqua;
+  background: #00adff;
 }
 .black-txt {
   color: black;
@@ -123,6 +123,15 @@ input {
   max-width: 300px;
   margin: auto;
   width: 50%;
+}
+.login-btn, .create-btn {
+  background: #00adff;
+  margin-top: 2rem;
+}
+.signin-nav {
+  display: block;
+  background-color: transparent;
+  margin-top: 2rem;
 }
 /* main tag */
 main {
@@ -435,6 +444,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin-right: 1rem;
   font-size: 50%;
 }
+/* =========================== Captn and Boat Page Styling =========================== */
+.main-img {
+  width: 40%;
+  height: auto;
+}
+.page-head {
+  color: gold;
+}
+.img-txt {
+  font-size: 2rem;
+  background:black
+}
+
 /* =========================== FOOTER Styling =========================== */
 #footer {
   background-color: #647678;
