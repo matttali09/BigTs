@@ -5,7 +5,7 @@ const CaptnPage = () => (
                 <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 <h3 className="page-head">The Capt'n Page!</h3>
             <div>
-                <img className="main-img" src="../images/Sail-Fish.JPG"></img>
+                <img className="main-img" src="../images/Black-Grouper.JPG" alt="Big Ts Captain"></img>
                 <p className="img-txt">  
                 Captain Tony Taliancich (Capt “T”) is an experience offshore angler.  He is US Coast Guard licensed and has been fishing all his life.  
                     He comes from a long line of fisherman.  His Grandfather captained a Shrimp Boat and that is where Capt T first got hooked.  

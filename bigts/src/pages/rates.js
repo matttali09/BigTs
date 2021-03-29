@@ -27,12 +27,16 @@ const RatesPage = (props) => {
 
     const[modalMessage, setModalMessage] = useState(pickDateMessage);
 
-    const modalOptions = true;
+    const [modalOptions, setModalOptions] = useState(true);
 
     const handleClick = (event) => {
         setOpenModal(true);
         console.log(event.target.id)
         setModalKey(event.target.id)
+        if (event.target.id === "contact") {
+            setModalOptions(false);
+            setModalMessage("Contact Us Now \n Phone: (850) 905-7203 Email: BigTsCharters@gmail.com");
+        }
     }
    
     return (
@@ -87,7 +91,7 @@ const RatesPage = (props) => {
                         <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
-                                    <div className="half-day-img" onClick={handleClick}>
+                                    <div className="half-day-img" id="contact" onClick={handleClick}>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +99,7 @@ const RatesPage = (props) => {
                                 <h5>Call for customized length and style of days!</h5>
                             </div>
                             <div className="btn-wrap">
-                                <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
+                                <button id="contact" className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
                             </div>
                         </div>
                     </div>
