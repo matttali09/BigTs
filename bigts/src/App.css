@@ -116,16 +116,6 @@ nav .brand:active {
   margin-right: 10%;
   color: rgba(255, 255, 255, 0.8);
 }
-.ReactModal__Content {
-  background-color: #000000a3 !important;
-  border: 4px SOLID red !important;
-  border-radius: 4px !important;
-  animation: 1s ease 1s reverse both paused slidein !important;
-}
-.ReactModal__Content:hover {
-  border: 3px SOLID blue !important;
-  border-radius: 4px !important;
-}
 
 /* =========================== LOGIN styling =========================== */
 input {
@@ -241,6 +231,17 @@ abbr[title] {
 
 /* =========================== MODAL Styling =========================== */
 
+.ReactModal__Content {
+  background-color: #000000a3 !important;
+  border: 4px SOLID red !important;
+  border-radius: 55px !important;
+  animation: 1s ease 1s reverse both paused slidein !important;
+}
+.ReactModal__Content:hover {
+  border: 3px SOLID blue !important;
+  border-radius: 55px !important;
+}
+
 .ReactModal__Overlay {
   opacity: 0;
   transition: opacity 250ms ease-in-out;
@@ -259,7 +260,7 @@ abbr[title] {
 
 .modal-text {
   font-size: 1.5rem;
-  color: #ff00d48c;
+  color: #00f3ff;
   margin-bottom: 3rem;
 }
 .schedule-btns {
@@ -267,13 +268,13 @@ abbr[title] {
 }
 .yes-btn {
   font-size: 1.5rem;
-  background-color: lawngreen;
+  background-color: #00fc13;
   margin-right: -1rem;
   border-radius: 4px;
 }
 .cancel-btn {
   font-size: 1.5rem;
-  background: orangered; 
+  background: #ff2f00; 
   margin-left: 3rem;
   border-radius: 4px;
   font-size: 22px;
@@ -421,7 +422,7 @@ input[type="date"] {
   font-size: x-small;
   align-content: center;
   text-align-last: center;
-  color: #80008052;
+  color: white;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);

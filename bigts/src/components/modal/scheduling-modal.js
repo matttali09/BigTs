@@ -30,11 +30,20 @@ export default function MyModal(props) {
   var subtitle;
 
   const [modalIsOpen,setIsOpen] = React.useState(true);
+  const [doubleClick, setDoubleClick] = React.useState(false);
+  const [modalOptions, setModalOptions] = React.useState(false);
+
+  const [userInfo, setUserInfo] = React.useState(false);
+  const [modalMessage, setModalMessage] = React.useState(false);
+
+  const userName = props.username;
+
 
   const componentRef = useRef(null);
  
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
+    // console.log(Time.now())
     subtitle.style.color = '#000';
   }
  
@@ -43,33 +52,147 @@ export default function MyModal(props) {
     setIsOpen(false);
   }
 
-  function scheduleAndCloseModal () {
-    if (props.findElAndColor) {
-      props.findElAndColor(props.formatedDate, "yellow");
-      API.updateUser(props.userInfo.username, props.userInfo);
+  function scheduleAndCloseModal (event) {
+    setDoubleClick(true);
+
+    if (props.findElAndColor && props.formatedDate && userName) {
+      // props.scheduled = {date: props.formatedDate, approved: true}
+      props.findElAndColor(props.formatedDate, "#008074");
+
+      API.getUser(userName).then(response => {
+        console.log(response.data.scheduled)
+        let userData = response.data.scheduled;
+        userData.push({date: props.formatedDate, approved: true, username: userName, typeKey: "EO"})
+        console.log("userData")
+        console.log(userData)
+        API.updateUser(userName, {scheduled: userData}).then(response => {
+          console.log("response")
+          console.log(response)
+        })
+      })
+
+      
+
+    } else {
+
+      console.log("THIS RAN6")
     }
+    
     closeModal();
   }
 
   // move to 
-  function formatDate() {
-    // if (input exists) {
-    //   const formatedValue = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(nextValue);
-    // }
-    let thisValue;
+  function formatDate(event) {
+    let thisValue = new Date(event.target.value);
+    const formatedValue = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(thisValue);
+
     console.log("props.user");
     console.log(props);
-    const element = componentRef.current.querySelector(`input[type="date"]`);
-    console.log("element");
-    console.log(element);
+    console.log(userName)
 
-    if(element) {
-      if (element.value) {
-        element.value ? thisValue = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(element.value) : console.log("no date selected");
-        let userInfo = {user: props.userInfo, scheduled: thisValue};
-        console.log(userInfo);
-        // API.updateUser(props.userInfo, userInfo);
-        scheduleAndCloseModal();
+    console.log("userInfo");
+    console.log(userInfo);
+
+    checkUserSchedule(formatedValue);
+  }
+
+  const checkUserSchedule = formatedValue => {
+    let usersScheduledDates = [];
+
+    if (props.modalKey) {
+      setUserInfo({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: props.modalKey}})
+    } else {
+      setUserInfo({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: "EO"}})
+    }
+    console.log({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: "EO"}})
+
+
+    API.getUsers().then(response => {
+      // console.log(response);
+      // console.log(response.data);
+      response.data.forEach(user => { 
+        // console.log(user);
+        user.scheduled.forEach(scheduledDate => {
+          if (user) {
+            if (props.role === "admin") {
+              if (scheduledDate.approved) {
+                scheduledDate.username = user.username;
+                usersScheduledDates.push(scheduledDate);
+              } else {
+                scheduledDate.username = user.username;
+                usersScheduledDates.push(scheduledDate);
+              }
+
+            // for regular users
+            } else {
+              // scheduled date for this user which has been approved
+              if (scheduledDate.approved && user.username === userName.toLowerCase()) {
+                scheduledDate.username = user.username;;
+                usersScheduledDates.push(scheduledDate);
+
+                // scheduled date for this user which has not been approved
+              } else if (!scheduledDate.approved && user.username === userName.toLowerCase()) {
+                scheduledDate.username = user.username;
+                usersScheduledDates.push(scheduledDate)
+              
+                // scheduled date for a different user which has not been approved
+              } else {
+                scheduledDate.username = user.username;
+                usersScheduledDates.push(scheduledDate)
+              }
+            }
+          }
+        })
+      })
+      // inside the .then of users retrieval
+      if (formatedValue && isDateAfterToday(formatedValue)) {
+        setModal(formatedValue, usersScheduledDates);
+      } else if (formatedValue) {
+        console.log("Date before today")
+        setModalMessage("BUT THE DATE SELECTED IS BEFORE TODAY");
+      }
+    })
+  }
+
+  function isDateAfterToday(date) {
+    date = new Date(date);
+    return new Date(date.toDateString()) >= new Date(new Date().toDateString());
+  }
+
+  const setModal = (formatedDate, usersScheduledDates) => {
+
+    for (let scheduledDate of usersScheduledDates) {
+      console.log("scheduledDate");
+      console.log(scheduledDate);
+      if (props.role === "admin") {
+        if (formatedDate === scheduledDate.date && scheduledDate.approved) {
+          // set message for approved date selected by admin
+          break;
+        } else if (formatedDate === scheduledDate.date) {
+          // set message for admin selected date not approved
+          break;
+        } else {
+          // set message for non-scheduled dates
+        }
+      } else {
+        console.log(formatedDate)
+        console.log(scheduledDate.date)
+        if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
+          // message for approved date selected same user
+          setModalMessage("You Have Already Been Approved for This Date.")
+          break;
+        } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
+          // message for not approved selected same user
+          setModalMessage("You have Not Been Approved for This Date.")
+          break;
+        } else if (formatedDate === scheduledDate.date) {
+          // message for scheduledDate selected not same user
+          setModalMessage("This Date is Already Scheduled for Another User.")
+          break;
+        } else {
+          // message for day available
+          setModalMessage("Great Just Confirm Your Adventure Now!")
+        }
       }
     }
   }
@@ -90,11 +213,14 @@ export default function MyModal(props) {
             
             <div className="modal-text">{props.message}</div>
             {props.message === "Go Ahead and Pick your date now!"  && 
-              <input type="date" name="date" onClick={formatDate}/>
+              <input type="date" name="date" onChange={formatDate}/>
             }
-            {props.modalOptions ? (
+            {modalMessage  && 
+              <div className="modal-text">{modalMessage}</div>
+            }
+            {props.modalOptions && !modalOptions ? (
               <div className="schedule-btns">
-                <button className="yes-btn" onClick={scheduleAndCloseModal}>Yes!</button>
+                <button className="yes-btn" onClick={scheduleAndCloseModal}>Confirm!</button>
                 <button className="cancel-btn" onClick={closeModal}>Cancel</button>
               </div>
             ) : (

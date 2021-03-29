@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 
 import SchedulingModal from "../components/modal/scheduling-modal.js"
+import API from "../utils/API.js";
 
 const RatesPage = (props) => {
 
-    const userInfo = props.user;
+    const [userInfo, setUserInfo] = useState(props.user);
+    const [modalKey, setModalKey] = useState(null);
+
+    // component did mount equivalent for function components hook
+    useEffect(() => {
+        // code to run on component mount
+        if (props.user)
+            API.getUser(props.user).then(response => {
+                setUserInfo(response.data.scheduled)
+                console.log(userInfo);
+            })
+        
+        // ignore missing dependency warning
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -14,8 +29,10 @@ const RatesPage = (props) => {
 
     const modalOptions = true;
 
-    const handleClick = () => {
+    const handleClick = (event) => {
         setOpenModal(true);
+        console.log(event.target.id)
+        setModalKey(event.target.id)
     }
    
     return (
@@ -24,10 +41,10 @@ const RatesPage = (props) => {
                 <h1>Half Days</h1>
                 <div className="rates-section">
                     <div className="row half-day-rates">
-                        <div className="col-s-12 col-md-6 card">
+                        <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
-                                    <div className="half-day-img" onClick={handleClick}>
+                                    <div className="half-day-img" id="FO" onClick={handleClick}>
                                     </div>
                                 </div>
                             </div>
@@ -35,34 +52,17 @@ const RatesPage = (props) => {
                                 <h5>FIVE-HOUR OFF-SHORE FISHING TRIP</h5>
                             </div>
                             <div className="rate-txt">
-                                <p>$400 | Up to Six People | All Ages | Intro and Advanced Off-Shore Fishing</p>
+                                <p>$400 | Up to Four People | All Ages | Intro and Advanced Off-Shore Fishing</p>
                             </div>
                             <div className="btn-wrap">
-                                <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
-                            </div>
-                        </div>
-                        <div className="col-s-12 col-md-6 card">
-                            <div className="img-wrap">
-                                <div className="img-border">
-                                    <div className="half-day-img" onClick={handleClick}>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="rate-txt-header">
-                                <h5>FIVE-HOUR In-SHORE FISHING TRIP</h5>
-                            </div>
-                            <div className="rate-txt">
-                                <p>$300 | Up to Six People | All Ages | Intro and Advanced IN-Shore Fishing</p>
-                            </div>
-                            <div className="btn-wrap">
-                                <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
+                                <button className="btn waves-effect half-day-btn" id="FO" onClick={handleClick}>Book Now!</button>
                             </div>
                         </div>
                     </div>
                     
                     <h1>Full Days</h1>
                     <div className="row full-day-rates">
-                        <div className="col-s-12 col-md-6 card">
+                        <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
                                     <div className="half-day-img" onClick={handleClick}>
@@ -73,13 +73,17 @@ const RatesPage = (props) => {
                                 <h5>EIGHT-HOUR OFF-SHORE FISHING TRIP</h5>
                             </div>
                             <div className="rate-txt">
-                                <p>$600 | Up to Six People | All Ages | Intro and Advanced Off-Shore Fishing</p>
+                                <p>$600 | Up to Four People | All Ages | Intro and Advanced Off-Shore Fishing</p>
                             </div>
                             <div className="btn-wrap">
                                 <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
                             </div>
                         </div>
-                        <div className="col-s-12 col-md-6 card">
+                    </div>
+
+                    <h1>Customized Days</h1>
+                    <div className="row full-day-rates">
+                        <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
                                     <div className="half-day-img" onClick={handleClick}>
@@ -87,10 +91,7 @@ const RatesPage = (props) => {
                                 </div>
                             </div>
                             <div className="rate-txt-header">
-                                <h5>EIGHT-HOUR In-SHORE FISHING TRIP</h5>
-                            </div>
-                            <div className="rate-txt">
-                                <p>$500 | Up to Six People | All Ages | Intro and Advanced IN-Shore Fishing</p>
+                                <h5>Call for customized length and style of days!</h5>
                             </div>
                             <div className="btn-wrap">
                                 <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
@@ -105,8 +106,10 @@ const RatesPage = (props) => {
                             closeModalHandler={setOpenModal}
                             userInfo={userInfo}
                             modalOptions={modalOptions}
+                            modalKey={modalKey}
+                            username={props.user}
                         />
-                }
+                    }
             </div>
         </div>
     );
