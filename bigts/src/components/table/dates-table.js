@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import API from "../../utils/API.js"
+import API from "../../utils/API.js";
+
+import CancelModal from "../modal/cancel-modal.js"
 
 const Checkbox = ({ type = "checkbox", name, checked = false, onChange, user }) => {
     //console.log("Checkbox: ", name, checked);
@@ -11,6 +13,11 @@ const Checkbox = ({ type = "checkbox", name, checked = false, onChange, user }) 
 
 const DatesTable = (props) => {
     const [checkedItems, setCheckedItems] = useState(props.checkedDates ? props.checkedDates : {});
+
+    const [openModal, setOpenModal] = useState(false);
+    const userName = props.username;
+
+    const [formatedDate, setFormatedDate] = useState(false);
 
     const handleChange = event => {
         const userName = event.target.attributes.user.value;
@@ -64,14 +71,24 @@ const DatesTable = (props) => {
         // console.log(checkboxArr);
         return checkboxArr;
     }
+    const setCancelModal = (event) => {
+        setFormatedDate(event.target.id);
+        setOpenModal(true);
+    }
 
     const userDates = props.dates.map((date, index) =>
         date.approved ? (
-            <p key={index}>Your adventure scheduled for <span className="date">{date.date}</span> is approved!</p>
+            <p key={index} id={date.date} onClick={setCancelModal}>Your adventure scheduled for <span className="date" id={date.date}>{date.date}</span> is approved!</p>
         ) : (
-            <p key={index}>Your adventure scheduled for <span className="date">{date.date}</span> has not been approved yet.</p>
+            <p key={index} id={date.date} onClick={setCancelModal}>Your adventure scheduled for <span className="date" id={date.date}>{date.date}</span> has not been approved yet.</p>
         )
+        ,
+        
     );
+
+    
+
+    
 
     return (
         <div className="dates-table">
@@ -96,6 +113,13 @@ const DatesTable = (props) => {
                     <div>{userDates}</div>
                 </div>
             )}
+            {openModal && 
+                <CancelModal 
+                    formatedDate={formatedDate}
+                    username={userName}
+                    closeModalHandler={setOpenModal}
+                />
+            }
         </div>
     );
 };

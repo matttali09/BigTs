@@ -89,7 +89,7 @@ export default function AccountPage(props) {
                 <h2>Scheduled Dates</h2>
                 {!dates.length ? 
                 <p>No dates have been scheduled yet.</p>
-                : <DatesTable dates={dates} role={role} checkedDates={checkedDates}/>
+                : <DatesTable username={userName} dates={dates} role={role} checkedDates={checkedDates}/>
                 }
                 <h2 className="account-info-header">Account Info</h2>
                 <div className="account-info">

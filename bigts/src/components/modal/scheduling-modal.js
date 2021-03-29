@@ -182,12 +182,18 @@ export default function MyModal(props) {
       if (props.role === "admin") {
         if (formatedDate === scheduledDate.date && scheduledDate.approved) {
           // set message for approved date selected by admin
+          setModalMessage("You Have Already Approved This Date.")
+          setModalOptions(false);
           break;
         } else if (formatedDate === scheduledDate.date) {
           // set message for admin selected date not approved
+          setModalMessage("You Have Not Approved This Date.")
+          setModalOptions(false);
           break;
         } else {
           // set message for non-scheduled dates
+          setModalMessage("Confirm Blackout Date!")
+          setModalOptions(true);
         }
       } else {
         console.log(formatedDate)

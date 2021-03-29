@@ -170,8 +170,8 @@ class CreateAccountPage extends Component {
 								onClick={this.handleSubmit}
 								type="submit"
 							>Create Account</button>
-							<Link to="/create-account" className="center signin-nav">
-								<span>Don't have an Account Yet?</span>
+							<Link to="/signin" className="center signin-nav">
+								<span>Already have an Account?</span>
 							</Link>
 						</div>
 					</form>

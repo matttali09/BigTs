@@ -138,7 +138,7 @@ function CalendarFun(props) {
         } else {
           // set message for non-scheduled dates
           setModalMessage(adminDateNotScheduledMessage);
-          setModalOptions(false);
+          setModalOptions(true);
           setOpenModal(true);
         }
       } else {
