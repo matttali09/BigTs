@@ -19,12 +19,11 @@ class Home extends Component {
     return (
       <div className="container mainContent">
         <center>
-            <h1>RECENT ADVENTURES</h1>
+            <h1>Gallery</h1>
         </center>
         <Slider/>
         <center>
-            <h3 style={{"marginTop": "80px"}}>Plan Your Adventure Today!</h3>
-            <Link to="/scheduling" className="main-btn btn btn-link waves-effect center">
+            <Link to="/scheduling" style={{"marginTop": "80px"}} className="main-btn btn btn-link waves-effect center">
               <span className="black-txt">Schedule Your Adventure!</span>
             </Link>
         </center>

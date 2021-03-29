@@ -15,7 +15,15 @@ body {
 button, input, optgroup, select, textarea {
   font-family: "Roboto Condensed", Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.header {
+  display:inline-flex;
+}
+.header .logo-img {
+  height: 4rem;
+  margin: auto;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
 /* =========================== NAV Styling =========================== */
 .nav-wrapper {
   background-color: #2f3738;
@@ -57,10 +65,10 @@ nav .brand a {
   height: 100%;
   margin-left: 1%;
   display: inline-block;
-  background: black;
-  padding: 12px 33px;
-  margin-top: -5px;
-  font-size: 33px;
+  padding: 0;
+}
+nav .logo-img {
+  height: 42px;
 }
 nav .btn-link {
   position: relative;
@@ -510,14 +518,20 @@ footer i {
 }
 
 /* media queries for navbar buttons */
-@media only screen and (min-width: 993px) {
+@media only screen and (min-width: 1260px) {
   .hide-on-large-and-up {
       display: none !important;
   }
+  .hide-on-med-and-down {
+    display: auto !important;
+  }
 }
-@media only screen and (min-width: 993px) {
+@media only screen and (max-width: 1260px) {
   .hide-on-large-and-up {
-      display: none !important;
+      display: auto !important;
+  }
+  .hide-on-med-and-down {
+    display: none !important;
   }
 }
 
