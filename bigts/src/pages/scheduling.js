@@ -10,11 +10,8 @@ class Scheduling extends Component {
         return (
             <div className="container mainContent">
                 <center>
-                    <div className="header">
-                        <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
-                        <h1>Plan Your Adventure Today!</h1>
-                        <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
-                    </div>
+                    <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
+                    <h1>Plan Your Adventure Today!</h1>
                     <Calendar 
                     user={this.props.user}
                     role={this.props.role}
