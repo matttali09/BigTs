@@ -86,6 +86,7 @@ export default function AccountPage(props) {
     return (
         <div className="container mainContent">
             <div className="center">
+            <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 <h2>Scheduled Dates</h2>
                 {!dates.length ? 
                 <p>No dates have been scheduled yet.</p>
@@ -112,6 +113,7 @@ export default function AccountPage(props) {
                         </div>
                     </div>
                 </div>
+                <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 {openModal &&
                     <PasswordModal 
                     message={modalMessage}

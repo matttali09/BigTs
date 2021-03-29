@@ -40,7 +40,7 @@ class Nav extends Component {
                     {loggedIn ? (
                         <div className="hide-on-med-and-down">
                             <Link to="/home" className="btn brand waves-effect">
-                                <img className="logo-img" src="../images/BigTs-logo.PNG"></img>
+                                <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                             </Link>
                             
                             <Link to="/signin" className="btn btn-link waves-effect text-secondary center" onClick={this.logout}>
@@ -65,7 +65,7 @@ class Nav extends Component {
                     ) : (
                             <div className="hide-on-med-and-down">
                                 <Link to="/home" className="btn brand waves-effect">
-                                    <div className="cursive">Big T's</div>
+                                    <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                                 </Link>
                                 <Link to="/create-account" className="btn btn-link waves-effect center">
                                     <span className="text-secondary">Create Account</span>
@@ -80,7 +80,7 @@ class Nav extends Component {
                         {loggedIn ? (
                             <>
                                 <Link to="/home" className="waves-effect sidenav-close">
-                                    <div className="cursive">Big T's</div>
+                                    <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                                 </Link>
                                 <Link to="/scheduling" className="waves-effect sidenav-close">
                                     <span>Scheduling</span>
@@ -107,7 +107,7 @@ class Nav extends Component {
                         ) : (
                             <>
                                 <Link to="/home" className="waves-effect sidenav-close">
-                                    <div className="cursive">Big T's</div>
+                                    <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                                 </Link>
                                 <Link to="/create-account" className="waves-effect sidenav-close">
                                     <span>Create Account</span>

@@ -38,6 +38,7 @@ const RatesPage = (props) => {
     return (
         <div className="rates-page">
             <div className="container mainContent center">
+                <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 <h1>Half Days</h1>
                 <div className="rates-section">
                     <div className="row half-day-rates">
@@ -100,6 +101,7 @@ const RatesPage = (props) => {
                     </div>
                     
                 </div>
+                <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                     {openModal &&
                         <SchedulingModal 
                             message={modalMessage}

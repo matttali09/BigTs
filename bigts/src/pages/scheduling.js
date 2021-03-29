@@ -11,14 +11,15 @@ class Scheduling extends Component {
             <div className="container mainContent">
                 <center>
                     <div className="header">
-                        <img className="logo-img" src="../images/BigTs-logo.PNG"></img>
+                        <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                         <h1>Plan Your Adventure Today!</h1>
-                        <img className="logo-img" src="../images/BigTs-logo.PNG"></img>
+                        <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                     </div>
                     <Calendar 
                     user={this.props.user}
                     role={this.props.role}
                     />
+                    <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 </center>
             </div>
         );

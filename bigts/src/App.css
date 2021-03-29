@@ -24,6 +24,10 @@ button, input, optgroup, select, textarea {
   margin-left: 2rem;
   margin-right: 2rem;
 }
+.logo-img {
+  height: 6rem;
+  margin: 2rem;
+}
 /* =========================== NAV Styling =========================== */
 .nav-wrapper {
   background-color: #2f3738;
@@ -67,7 +71,7 @@ nav .brand a {
   display: inline-block;
   padding: 0;
 }
-nav .logo-img {
+nav .nav-logo {
   height: 42px;
 }
 nav .btn-link {
@@ -514,6 +518,9 @@ footer i {
   }
   .rates-section, .account-info, .dates-table {
     width: 95%
+  }
+  .header {
+    display:block;
   }
 }
 
