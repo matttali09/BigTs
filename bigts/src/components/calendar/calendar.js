@@ -80,22 +80,24 @@ function CalendarFun(props) {
             // for regular users
             } else {
               // scheduled date for this user which has been approved
-              if (scheduledDate.approved && user.username === userName.toLowerCase()) {
-                scheduledDate.username = user.username;;
-                usersScheduledDates.push(scheduledDate);
-                findElAndColor(scheduledDate.date, "#008074");
+              if (userName) {
+                if (scheduledDate.approved && user.username === userName.toLowerCase()) {
+                  scheduledDate.username = user.username;;
+                  usersScheduledDates.push(scheduledDate);
+                  findElAndColor(scheduledDate.date, "#008074");
 
-                // scheduled date for this user which has not been approved
-              } else if (!scheduledDate.approved && user.username === userName.toLowerCase()) {
-                scheduledDate.username = user.username;
-                usersScheduledDates.push(scheduledDate)
-                findElAndColor(scheduledDate.date, "#ff8100");
-              
-                // scheduled date for a different user which has not been approved
-              } else {
-                scheduledDate.username = user.username;
-                usersScheduledDates.push(scheduledDate)
-                findElAndColor(scheduledDate.date, "#444");
+                  // scheduled date for this user which has not been approved
+                } else if (!scheduledDate.approved && user.username === userName.toLowerCase()) {
+                  scheduledDate.username = user.username;
+                  usersScheduledDates.push(scheduledDate)
+                  findElAndColor(scheduledDate.date, "#ff8100");
+                
+                  // scheduled date for a different user which has not been approved
+                } else {
+                  scheduledDate.username = user.username;
+                  usersScheduledDates.push(scheduledDate)
+                  findElAndColor(scheduledDate.date, "#444");
+                }
               }
             }
           }
@@ -144,29 +146,31 @@ function CalendarFun(props) {
       } else {
         console.log(formatedDate)
         console.log(scheduledDate.date)
-        if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
-          // message for approved date selected same user
-          setModalMessage(userAcceptedMessage);
-          setModalOptions(false); 
-          setOpenModal(true);
-          break;
-        } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
-          // message for not approved selected same user
-          setModalMessage(userUnacceptedMessage);
-          setModalOptions(false);
-          setOpenModal(true);
-          break;
-        } else if (formatedDate === scheduledDate.date) {
-          // message for scheduledDate selected not same user
-          setModalMessage(unavailableMessage);
-          setModalOptions(false);
-          setOpenModal(true);
-          break;
-        } else {
-          // message for day available
-          setModalMessage(availableMessage);
-          setModalOptions(true);
-          setOpenModal(true);
+        if (userName) {
+          if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
+            // message for approved date selected same user
+            setModalMessage(userAcceptedMessage);
+            setModalOptions(false); 
+            setOpenModal(true);
+            break;
+          } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
+            // message for not approved selected same user
+            setModalMessage(userUnacceptedMessage);
+            setModalOptions(false);
+            setOpenModal(true);
+            break;
+          } else if (formatedDate === scheduledDate.date) {
+            // message for scheduledDate selected not same user
+            setModalMessage(unavailableMessage);
+            setModalOptions(false);
+            setOpenModal(true);
+            break;
+          } else {
+            // message for day available
+            setModalMessage(availableMessage);
+            setModalOptions(true);
+            setOpenModal(true);
+          }
         }
       }
     }
