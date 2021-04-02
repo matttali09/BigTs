@@ -187,7 +187,11 @@ function CalendarFun(props) {
     if (element) {
       let par = element.parentNode
       par.style.background = color;
-      element.style.color = "white";
+      if (color === "#EFEFEF") {
+        element.style.color = "black";
+      } else {
+        element.style.color = "white";
+      }
     } else {
       console.log("date not found;");
     }
@@ -222,7 +226,9 @@ function CalendarFun(props) {
         <CancelModal 
         formatedDate={formatedDate}
         username={cancelUsername}
-        closeModalHandler={setOpenModal}
+        closeModalHandler={setCancelModal}
+        checkUserSchedule={checkUserSchedule}
+        findElAndColor={findElAndColor}
       />
       }
     </div>

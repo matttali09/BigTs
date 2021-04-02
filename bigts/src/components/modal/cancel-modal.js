@@ -58,6 +58,10 @@ export default function MyModal(props) {
             console.log(filtered);
             API.updateUser(userName, {scheduled: filtered}).then(response => {
                 console.log(response)
+                if (props.checkUserSchedule) {
+                  props.findElAndColor(props.formatedDate, "#EFEFEF");
+                  props.checkUserSchedule(null);
+                }
             })
         }
     })
