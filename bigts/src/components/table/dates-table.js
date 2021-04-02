@@ -106,9 +106,9 @@ const DatesTable = (props) => {
                                     user={item.user}
                                 />
                                 {item.label}
-                                <br/>Date: {item.name}
-                                <br/>Phone: {item.number}
-                                <br/>Email: {item.email}
+                                <br/><span className="date-text">Date: {item.name}</span>
+                                <br/><span className="phone-text">Phone: {item.number}</span>
+                                <br/><span className="email-text">Email: {item.email}</span>
                             </label>
                         </p>
                     ))}

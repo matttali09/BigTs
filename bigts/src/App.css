@@ -333,6 +333,15 @@ abbr[title] {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.date-text {
+  color: #00ff72;
+}
+.phone-text {
+  color: #fbff00;
+}
+.email-text {
+  color: gold;
+}
 .row {
   border-bottom: 1px dashed white;
   border-radius: 3%;
