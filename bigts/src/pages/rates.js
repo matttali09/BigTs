@@ -36,6 +36,9 @@ const RatesPage = (props) => {
         if (event.target.id === "contact") {
             setModalOptions(false);
             setModalMessage("Contact Us Now \n Phone: (850) 905-7203 Email: BigTsCharters@gmail.com");
+        } else {
+            setModalOptions(true);
+            setModalMessage(pickDateMessage);
         }
     }
    
