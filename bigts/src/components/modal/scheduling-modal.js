@@ -20,9 +20,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     background            : 'darkgrey',
-    animation             : 'fadeIn ease 10s',
     textAlign             : 'center',
-    animation             : 'fadeOut ease 60s'
   }
 };
 
@@ -30,7 +28,6 @@ export default function MyModal(props) {
   var subtitle;
 
   const [modalIsOpen,setIsOpen] = React.useState(true);
-  const [doubleClick, setDoubleClick] = React.useState(false);
   const [modalOptions, setModalOptions] = React.useState(true);
   const [formatedDate, setFormatedDate] = React.useState(true);
 
@@ -54,8 +51,6 @@ export default function MyModal(props) {
   }
 
   function scheduleAndCloseModal (event) {
-    setDoubleClick(true);
-
     if (props.findElAndColor && props.formatedDate && userName) {
       // props.scheduled = {date: props.formatedDate, approved: true}
       props.findElAndColor(props.formatedDate, "#008074");

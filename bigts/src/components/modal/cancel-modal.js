@@ -20,9 +20,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     background            : 'darkgrey',
-    animation             : 'fadeIn ease 10s',
     textAlign             : 'center',
-    animation             : 'fadeOut ease 60s'
   }
 };
 

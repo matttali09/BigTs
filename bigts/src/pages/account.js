@@ -14,7 +14,7 @@ export default function AccountPage(props) {
 
     const passwordMessage = "So u wanna change your password huh?"
     const [openModal, setOpenModal] = useState(false);
-    const [modalMessage, setModalMessage] = React.useState(passwordMessage);
+    const modalMessage = passwordMessage;
 
     useEffect(() => {
         // console.log(this.state)

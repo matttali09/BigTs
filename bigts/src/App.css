@@ -336,10 +336,10 @@ abbr[title] {
 .date-text {
   color: #00ff72;
 }
-.phone-text {
+.phone-text a {
   color: #fbff00;
 }
-.email-text {
+.email-text a {
   color: gold;
 }
 .row {

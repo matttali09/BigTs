@@ -107,8 +107,8 @@ const DatesTable = (props) => {
                                 />
                                 {item.label}
                                 <br/><span className="date-text">Date: {item.name}</span>
-                                <br/><span className="phone-text">Phone: {item.number}</span>
-                                <br/><span className="email-text">Email: {item.email}</span>
+                                <br/><span className="phone-text"><a href={"tel:" + item.number} >Phone: {item.number}</a></span>
+                                <br/><span className="email-text"><a target="_blank" rel="noreferrer" href={"mailto: " + item.email} >Email: {item.email}</a></span>
                             </label>
                         </p>
                     ))}
