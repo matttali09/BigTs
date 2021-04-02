@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import API from '../../utils/API.js';
 import SchedulingModal from "../modal/scheduling-modal.js";
+import CancelModal from "../modal/cancel-modal.js";
  
 function CalendarFun(props) {
   // declare value hooks
   const [value, setValue] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
+  const [cancelModal, setCancelModal] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [formatedDate, setFormatedDate] = useState("");
   const [modalOptions, setModalOptions] = useState(false);
@@ -16,8 +18,8 @@ function CalendarFun(props) {
   const unavailableMessage = "BUT THE DATE YOU HAVE SELECTED IS UNAVAILABLE.";
   const userUnacceptedMessage = "BUT YOU HAVE NOT BEEN APPROVED FOR THIS DATE.";
   const userAcceptedMessage = "YOU HAVE BEEN APPROVED FOR THIS DATE!";
-  const adminDateApprovedMessage = "YOU HAVE ALREADY APPROVED THIS DATE";
-  const adminDateUnapprovedMessage = "BUT YOU HAVE NOT APPROVED THIS DATE YET";
+  const adminDateApprovedMessage = "YOU HAVE ALREADY APPROVED THIS DATE, WOULD YOU LIKE TO CANCEL IT?";
+  const adminDateUnapprovedMessage = "BUT YOU HAVE NOT APPROVED THIS DATE YET, WOULD YOU LIKE TO CANCEL IT?";
   const adminDateNotScheduledMessage = "THIS DATE HAS NOT BEEN SCHEDULED WOULD YOU LIKE TO BLACK IT OUT?";
 
   const [modalMessage, setModalMessage] = React.useState(availableMessage);
@@ -128,14 +130,14 @@ function CalendarFun(props) {
         if (formatedDate === scheduledDate.date && scheduledDate.approved) {
           // set message for approved date selected by admin
           setModalMessage(adminDateApprovedMessage);
-          setModalOptions(false);
-          setOpenModal(true);
+          setCancelModal(true);
+          setOpenModal(false);
           break;
         } else if (formatedDate === scheduledDate.date) {
           // set message for admin selected date not approved
           setModalMessage(adminDateUnapprovedMessage);
-          setModalOptions(false);
-          setOpenModal(true);
+          setCancelModal(true);
+          setOpenModal(false);
           break;
         } else {
           // set message for non-scheduled dates
@@ -212,6 +214,13 @@ function CalendarFun(props) {
           modalOptions={modalOptions}
           username={userName}
         />
+      }
+      {cancelModal &&
+        <CancelModal 
+        formatedDate={formatedDate}
+        username={userName}
+        closeModalHandler={setOpenModal}
+      />
       }
     </div>
   );

@@ -60,7 +60,7 @@ const RatesPage = (props) => {
                                 <h5>FIVE-HOUR OFF-SHORE FISHING TRIP</h5>
                             </div>
                             <div className="rate-txt">
-                                <p>$400 | Up to Four People | All Ages | Intro and Advanced Off-Shore Fishing</p>
+                                <p>$500 | Up to Four People | All Ages | Intro and Advanced Off-Shore Fishing</p>
                             </div>
                             <div className="btn-wrap">
                                 <button className="btn waves-effect half-day-btn" id="FO" onClick={handleClick}>Book Now!</button>
@@ -81,7 +81,7 @@ const RatesPage = (props) => {
                                 <h5>EIGHT-HOUR OFF-SHORE FISHING TRIP</h5>
                             </div>
                             <div className="rate-txt">
-                                <p>$600 | Up to Four People | All Ages | Intro and Advanced Off-Shore Fishing</p>
+                                <p>$800 | Up to Four People | All Ages | Intro and Advanced Off-Shore Fishing</p>
                             </div>
                             <div className="btn-wrap">
                                 <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
