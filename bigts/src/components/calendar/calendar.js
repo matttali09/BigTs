@@ -9,6 +9,7 @@ function CalendarFun(props) {
   const [value, setValue] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
+  const [cancelUsername, setCancelUserename] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [formatedDate, setFormatedDate] = useState("");
   const [modalOptions, setModalOptions] = useState(false);
@@ -130,12 +131,14 @@ function CalendarFun(props) {
         if (formatedDate === scheduledDate.date && scheduledDate.approved) {
           // set message for approved date selected by admin
           setModalMessage(adminDateApprovedMessage);
+          setCancelUserename(scheduledDate.username);
           setCancelModal(true);
           setOpenModal(false);
           break;
         } else if (formatedDate === scheduledDate.date) {
           // set message for admin selected date not approved
           setModalMessage(adminDateUnapprovedMessage);
+          setCancelUserename(scheduledDate.username);
           setCancelModal(true);
           setOpenModal(false);
           break;
@@ -218,7 +221,7 @@ function CalendarFun(props) {
       {cancelModal &&
         <CancelModal 
         formatedDate={formatedDate}
-        username={userName}
+        username={cancelUsername}
         closeModalHandler={setOpenModal}
       />
       }
