@@ -175,23 +175,8 @@ h6 {
 .mainContent h6 {
   background-color: #515d60d6;
 }
-.game-header {
-  color: #ffafff;
-  margin-bottom: 2%;
-}
-.game-img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 150px;
-}
 img:hover {
   box-shadow: 0 0 10px 5px rgba(60, 165, 194, 0.8);
-}
-.game-description {
-  color: ivory;
-  margin-top: 0;
-  margin-bottom: 10%;
 }
 .row .col.dead-link {
   height: 30rem;
@@ -202,7 +187,9 @@ img:hover {
   display: block;
   float: none;
 }
-
+.email-helper, .username-helper, .password-helper {
+  color:firebrick;
+}
 /* =========================== Calendar and Table Styling =========================== */
 .react-calendar__navigation {
   height: 50px;

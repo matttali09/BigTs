@@ -3,6 +3,11 @@ import { Redirect, Link } from 'react-router-dom'
 import API from '../utils/API';
 
 class CreateAccountPage extends Component {
+	constructor(props) {
+		super(props);
+		this.myRef = React.createRef();
+	}
+
 	state = {
 		email: '',
 		username: '',
@@ -25,15 +30,17 @@ class CreateAccountPage extends Component {
 		if (this.state.username) {
 			return true;
 		} else {
-			alert("username was empty");
+			const el = this.myRef.current.querySelector(".username-helper")
+			el.innerHTML = "Username was empty";
 			return false;
 		}
 	}
 	validatePassword() {
-		if (this.state.password) {
+		if (this.state.password.length >= 8) {
 			return true;
 		} else {
-			alert("password was empty");
+			const el = this.myRef.current.querySelector(".password-helper")
+			el.innerHTML = "Password must be at least 8 characters";
 			return false;
 		}
 	}
@@ -43,7 +50,8 @@ class CreateAccountPage extends Component {
 		if(this.validateEmail(this.state.email)) {
 			// console.log("email validation passed");
 		} else {
-			alert("Please enter a valid email addressed");
+			const el = this.myRef.current.querySelector(".email-helper")
+			el.innerHTML = "Please enter a valid email address";
 			valid = false;
 		}
 		if (this.validateUserName()) {
@@ -118,7 +126,7 @@ class CreateAccountPage extends Component {
 				<center>
 					<h6 className="center text-28"><i className="material-icons">account_box</i> Create Account</h6></center>
 					<center>
-					<form className="form-horizontal">
+					<form className="form-horizontal" ref={this.myRef}>
 						<div className="form-group">
 							<div className="col-1 col-ml-auto">
 								<label className="form-label" htmlFor="email">email</label>
@@ -133,6 +141,7 @@ class CreateAccountPage extends Component {
 									onChange={this.handleChange}
 								/>
 							</div>
+							<p className="email-helper"></p>
 						</div>
 						<div className="form-group">
 							<div className="col-1 col-ml-auto">
@@ -148,6 +157,7 @@ class CreateAccountPage extends Component {
 									onChange={this.handleChange}
 								/>
 							</div>
+							<p className="username-helper"></p>
 						</div>
 						<div className="form-group">
 							<div className="col-1 col-ml-auto">
@@ -162,6 +172,7 @@ class CreateAccountPage extends Component {
 									onChange={this.handleChange}
 								/>
 							</div>
+							<p className="password-helper"></p>
 						</div>
 						<div className="form-group ">
 							<div className="col-7"></div>
