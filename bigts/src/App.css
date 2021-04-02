@@ -187,7 +187,7 @@ img:hover {
   display: block;
   float: none;
 }
-.email-helper, .username-helper, .password-helper {
+.email-helper, .username-helper, .password-helper, .number-helper {
   color:firebrick;
 }
 /* =========================== Calendar and Table Styling =========================== */

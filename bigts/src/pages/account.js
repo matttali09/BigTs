@@ -7,8 +7,9 @@ export default function AccountPage(props) {
     
     const userName = props.user;
     const role = props.role;
-    const [email, setEmail] = useState([]);
+    const [email, setEmail] = useState(false);
     const [dates, setDates] = useState([]);
+    const [number, setNumber] = useState(false);
     const [checkedDates, setCheckedDates] = useState({});
 
     const passwordMessage = "So u wanna change your password huh?"
@@ -28,6 +29,8 @@ export default function AccountPage(props) {
                 response.data.forEach(user => {
                     user.scheduled.forEach(scheduledDate => {
                         scheduledDate["name"] = user.username
+                        scheduledDate["number"] = user.number
+                        scheduledDate["email"] = user.email
                         // console.log("scheduledDate");
                         // console.log(scheduledDate);
                         datesArr.push(scheduledDate);
@@ -46,17 +49,19 @@ export default function AccountPage(props) {
             .then(response => {
                 console.log(response);
                 // insert scheduled array into the page
-                setEmail(response.data.email)
+                setEmail(response.data.email);
+                setNumber(response.data.number);
             })
         } else if (userName && role) {
             API.getUser(userName)
             .then(response => {
-                // console.log("response");
-                // console.log(response);
+                console.log("response");
+                console.log(response);
                 // insert scheduled array into the page
                 let newArrayMapped = sortScheduledDates(response.data.scheduled);
                 setDates(newArrayMapped);
                 setEmail(response.data.email);
+                setNumber(response.data.number);
             })
         } else {
             console.log("No User signed in.")
@@ -101,6 +106,10 @@ export default function AccountPage(props) {
                     <div className="row">
                         <div className="column"><span className="column-label">Email:</span></div>
                         <div className="column"><span className="column-info">{email}</span></div>
+                    </div>
+                    <div className="row">
+                        <div className="column"><span className="column-label">Phone Number:</span></div>
+                        <div className="column"><span className="column-info">{number}</span></div>
                     </div>
                     <div className="row">
                         <div className="column"><span className="column-label">Role:</span></div>

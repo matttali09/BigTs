@@ -20,6 +20,10 @@ const userSchema = new Schema({
     type: String,
     trim: true
   },
+  number: {
+    type: String,
+    trim: true
+  },
   scheduled: Array,
   role: String,
   date: { type: Date, default: Date.now }

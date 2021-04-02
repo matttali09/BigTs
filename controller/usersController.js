@@ -32,6 +32,7 @@ module.exports = {
             email: req.body.email,
             username: req.body.username,
             name: req.body.name,
+            number: req.body.number,
             role: req.body.role
         }), req.body.password, (err, user) => {
             if (err) {

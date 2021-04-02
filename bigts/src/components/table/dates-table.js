@@ -59,6 +59,8 @@ const DatesTable = (props) => {
                 label: date.approved ? (`${date.name} has scheduled date for ${date.date} Approved!`)
                     : (`${date.name} has scheduled date for ${date.date} not approved.`),
                 user: date.name,
+                number: date.number,
+                email: date.email,
                 checked: date.approved
             }
             checkboxArr.push(checkboxInfo);
@@ -97,13 +99,16 @@ const DatesTable = (props) => {
                     {checkboxes().map(item => (
                         <p key={item.key}>
                             <label key={item.key}>
-                            <Checkbox
-                                name={item.name}
-                                checked={checkedItems[item.name]}
-                                onChange={handleChange}
-                                user={item.user}
-                            />
-                            {item.label}
+                                <Checkbox
+                                    name={item.name}
+                                    checked={checkedItems[item.name]}
+                                    onChange={handleChange}
+                                    user={item.user}
+                                />
+                                {item.label}
+                                <br/>Date: {item.name}
+                                <br/>Phone: {item.number}
+                                <br/>Email: {item.email}
                             </label>
                         </p>
                     ))}

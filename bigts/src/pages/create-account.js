@@ -12,6 +12,7 @@ class CreateAccountPage extends Component {
 		email: '',
 		username: '',
 		password: '',
+		number: '',
 		confirmPassword: '', // not being used;
 		redirectTo: null
 	}
@@ -28,6 +29,8 @@ class CreateAccountPage extends Component {
 	}
 	validateUserName() {
 		if (this.state.username) {
+			const el = this.myRef.current.querySelector(".username-helper")
+			el.innerHTML = "";
 			return true;
 		} else {
 			const el = this.myRef.current.querySelector(".username-helper")
@@ -35,12 +38,32 @@ class CreateAccountPage extends Component {
 			return false;
 		}
 	}
+	validateNumber() {
+		if (this.state.number) {
+			const re = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+			if (re.test(this.state.number)) {
+				const el = this.myRef.current.querySelector(".number-helper")
+				el.innerHTML = "";
+				return true;
+			} else {
+				const el = this.myRef.current.querySelector(".number-helper")
+				el.innerHTML = "Please enter a valid 10-digit phone number.";
+				return false;
+			}
+		} else {
+			const el = this.myRef.current.querySelector(".number-helper")
+			el.innerHTML = "Phone number was empty.";
+			return false;
+		}
+	}
 	validatePassword() {
 		if (this.state.password.length >= 8) {
+			const el = this.myRef.current.querySelector(".password-helper")
+			el.innerHTML = "";
 			return true;
 		} else {
 			const el = this.myRef.current.querySelector(".password-helper")
-			el.innerHTML = "Password must be at least 8 characters";
+			el.innerHTML = "Password must be at least 8 characters.";
 			return false;
 		}
 	}
@@ -48,14 +71,21 @@ class CreateAccountPage extends Component {
 	runValidation() {
 		let valid = true;
 		if(this.validateEmail(this.state.email)) {
+			const el = this.myRef.current.querySelector(".email-helper")
+			el.innerHTML = "";
 			// console.log("email validation passed");
 		} else {
 			const el = this.myRef.current.querySelector(".email-helper")
-			el.innerHTML = "Please enter a valid email address";
+			el.innerHTML = "Please enter a valid email address.";
 			valid = false;
 		}
 		if (this.validateUserName()) {
 			// console.log("username validation passed");
+		} else {
+			valid = false;
+		}
+		if (this.validateNumber()) {
+			// console.log("Phone number validation passed");
 		} else {
 			valid = false;
 		}
@@ -76,6 +106,7 @@ class CreateAccountPage extends Component {
 		if (this.state.username.toLowerCase().trim() === "matttali09" || this.state.username.toLowerCase().trim() === "tonytali") {
 			formData = {
 				email: this.state.email,
+				number: this.state.number,
 				username: this.state.username,
 				password: this.state.password,
 				role: 'admin'
@@ -83,6 +114,7 @@ class CreateAccountPage extends Component {
 		} else {
 			formData = {
 				email: this.state.email,
+				number: this.state.number,
 				username: this.state.username,
 				password: this.state.password,
 				role: "user"
@@ -129,7 +161,7 @@ class CreateAccountPage extends Component {
 					<form className="form-horizontal" ref={this.myRef}>
 						<div className="form-group">
 							<div className="col-1 col-ml-auto">
-								<label className="form-label" htmlFor="email">email</label>
+								<label className="form-label" htmlFor="email">Email</label>
 							</div>
 							<div className="col-3 col-mr-auto">
 								<input className="form-input"
@@ -142,6 +174,22 @@ class CreateAccountPage extends Component {
 								/>
 							</div>
 							<p className="email-helper"></p>
+						</div>
+						<div className="form-group">
+							<div className="col-1 col-ml-auto">
+								<label className="form-label" htmlFor="number">Phone Number</label>
+							</div>
+							<div className="col-3 col-mr-auto">
+								<input className="form-input"
+									type="text"
+									id="number"
+									name="number"
+									placeholder="(xxx) xxx-xxxx"
+									value={this.state.number}
+									onChange={this.handleChange}
+								/>
+							</div>
+							<p className="number-helper"></p>
 						</div>
 						<div className="form-group">
 							<div className="col-1 col-ml-auto">
