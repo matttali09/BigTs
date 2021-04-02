@@ -269,7 +269,7 @@ abbr[title] {
 .modal-text {
   font-size: 1.5rem;
   color: #00f3ff;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 .schedule-btns {
   color: white;
@@ -338,6 +338,9 @@ abbr[title] {
 }
 .phone-text a {
   color: #fbff00;
+}
+.modal-text .phone-text a {
+  color: #ff00eb;
 }
 .email-text a {
   color: gold;
@@ -450,6 +453,7 @@ input[type="date"] {
   align-content: center;
   text-align-last: center;
   color: white;
+  margin-bottom: 2rem !important;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);

@@ -35,7 +35,7 @@ const RatesPage = (props) => {
         setModalKey(event.target.id)
         if (event.target.id === "contact") {
             setModalOptions(false);
-            setModalMessage("Contact Us Now \n Phone: (850) 905-7203 Email: BigTsCharters@gmail.com");
+            setModalMessage(<span>Contact Us Now <span className="phone-text"><br/><a href="tel:8509057203">Phone: (850) 905-7203</a></span> <span className="email-text"><br/><a target="_blank" rel="noreferrer" href="mailto: bigtscharters@gmail.com">Email: BigTsCharters@gmail.com</a></span></span>);
         } else {
             setModalOptions(true);
             setModalMessage(pickDateMessage);
