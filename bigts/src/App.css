@@ -411,7 +411,17 @@ abbr[title] {
 }
 .half-day-img {
   background: url("./images/Red-Grouper.jpg")
-    no-repeat center;
+  no-repeat center;
+}
+.full-day-img {
+  background: url("./images/Black-Grouper.JPG")
+  no-repeat center;
+}
+.contact-img {
+  background: url("./images/Mahi.jpg")
+  no-repeat center;
+}
+.day-img {
   background-size: 10rem 10rem;
   height: 10rem;
   width: 10rem;
@@ -421,14 +431,14 @@ abbr[title] {
   right: 0.3rem;
   transition: ease 0.3s;
 }
-.half-day-img:hover {
+.day-img:hover {
   height:9rem;
   width: 9rem;
   top: 0.7rem;
   right: 0.7rem;
   cursor: pointer;
 }
-.half-day-img:focus {
+.day-img:focus {
   height:9rem;
   width: 9rem;
   top: 0.7rem;

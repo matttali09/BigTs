@@ -52,7 +52,7 @@ const RatesPage = (props) => {
                         <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
-                                    <div className="half-day-img" id="FO" onClick={handleClick}>
+                                    <div className="day-img half-day-img" id="FO" onClick={handleClick}>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ const RatesPage = (props) => {
                         <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
-                                    <div className="half-day-img" onClick={handleClick}>
+                                    <div className="day-img full-day-img" onClick={handleClick}>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@ const RatesPage = (props) => {
                         <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
                                 <div className="img-border">
-                                    <div className="half-day-img" id="contact" onClick={handleClick}>
+                                    <div className="day-img contact-img" id="contact" onClick={handleClick}>
                                     </div>
                                 </div>
                             </div>
