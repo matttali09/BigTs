@@ -52,8 +52,8 @@ class Nav extends Component {
                             <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">The Boat</span>
                             </Link>
-                            <Link to="/captn" className="btn btn-link waves-effect text-secondary center">
-                                <span className="text-secondary">The Capt'n</span>
+                            <Link to="/captain" className="btn btn-link waves-effect text-secondary center">
+                                <span className="text-secondary">The Captain</span>
                             </Link>
                             <Link to="/rates" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Rates</span>
@@ -88,8 +88,8 @@ class Nav extends Component {
                                 <Link to="/rates" className="waves-effect sidenav-close">
                                     <span>Rates</span>
                                 </Link>
-                                <Link to="/captn" className="waves-effect sidenav-close">
-                                    <span>The Captn</span>
+                                <Link to="/captain" className="waves-effect sidenav-close">
+                                    <span>The Captain</span>
                                 </Link>
                                 <Link to="/boat" className="waves-effect sidenav-close">
                                     <span>The Boat</span>

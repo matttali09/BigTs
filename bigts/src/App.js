@@ -59,7 +59,7 @@ class App extends Component {
           />
           <Route exact path="/rates" render={() => <RatesPage user={this.state.username} role={this.state.role} />}
           />
-          <Route exact path="/captn" render={() => <CaptnPage user={this.state.username} role={this.state.role} />}
+          <Route exact path="/captain" render={() => <CaptnPage user={this.state.username} role={this.state.role} />}
           />
           <Route exact path="/boat" render={() => <BoatPage user={this.state.username} role={this.state.role} />}
           />
