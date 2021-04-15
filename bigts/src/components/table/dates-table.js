@@ -80,9 +80,9 @@ const DatesTable = (props) => {
 
     const userDates = props.dates.map((date, index) =>
         date.approved ? (
-            <p key={index} id={date.date} onClick={setCancelModal}>Your adventure scheduled for <span className="date" id={date.date}>{date.date}</span> is approved!</p>
+            <p key={index} id={date.date} onClick={setCancelModal}><span className="date" id={date.date}>{date.date}</span> is confirmed!</p>
         ) : (
-            <p key={index} id={date.date} onClick={setCancelModal}>Your adventure scheduled for <span className="date" id={date.date}>{date.date}</span> has not been approved yet.</p>
+            <p key={index} id={date.date} onClick={setCancelModal}><span className="date" id={date.date}>{date.date}</span> not confirmed.</p>
         )
         ,
         

@@ -46,11 +46,17 @@ export default function MyModal(props) {
   }
  
   function closeModal(){
+    try {
     props.closeModalHandler(false);
     setIsOpen(false);
+    } catch (e) {
+      console.log("closeModal error");
+      console.log(e);
+    }
   }
 
   function scheduleAndCloseModal (event) {
+    try {
     if (props.findElAndColor && props.formatedDate && userName) {
       // props.scheduled = {date: props.formatedDate, approved: true}
       props.findElAndColor(props.formatedDate, "#008074");
@@ -87,10 +93,15 @@ export default function MyModal(props) {
     }
     
     closeModal();
+  } catch (e) {
+    console.log("scheduleAndCloseModal");
+    console.log(e);
+  }
   }
 
   // move to 
   function formatDate(event) {
+    try {
     let thisValue = new Date(event.target.value);
     const formatedValue = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(thisValue);
 
@@ -103,9 +114,14 @@ export default function MyModal(props) {
 
     setFormatedDate(formatedValue)
     checkUserSchedule(formatedValue);
+    } catch (e) {
+      console.log("formatDate")
+      console.log(e)
+    }
   }
 
   const checkUserSchedule = formatedValue => {
+    try {
     let usersScheduledDates = [];
 
     if (props.modalKey) {
@@ -162,14 +178,23 @@ export default function MyModal(props) {
         setModalOptions(false);
       }
     })
+  } catch (e) {
+    console.log("checkUserSchedule error");
+    console.log(e);
+  }
   }
 
   function isDateAfterToday(date) {
+    if (date) {
     date = new Date(date);
     return new Date(date.toDateString()) >= new Date(new Date().toDateString());
+    } else {
+      console.log("isDateAfterToday Error date=null")
+    }
   }
 
   const setModal = (formatedDate, usersScheduledDates) => {
+    try {
 
     for (let scheduledDate of usersScheduledDates) {
       console.log("scheduledDate");
@@ -215,6 +240,10 @@ export default function MyModal(props) {
         }
       }
     }
+  }catch (e) {
+    console.log("setModal error");
+    console.log(e);
+  }
   }
  
     return (

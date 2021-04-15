@@ -12,7 +12,7 @@ export default function AccountPage(props) {
     const [number, setNumber] = useState(false);
     const [checkedDates, setCheckedDates] = useState({});
 
-    const passwordMessage = "So u wanna change your password huh?"
+    const passwordMessage = "Enter your new password below."
     const [openModal, setOpenModal] = useState(false);
     const modalMessage = passwordMessage;
 
@@ -95,7 +95,10 @@ export default function AccountPage(props) {
                 <h2>Scheduled Dates</h2>
                 {!dates.length ? 
                 <p>No dates have been scheduled yet.</p>
-                : <DatesTable username={userName} dates={dates} role={role} checkedDates={checkedDates}/>
+                : <div>
+                    <p className="info-text">In order to cancel date simply click on the one you would like to cancel</p>
+                    <DatesTable username={userName} dates={dates} role={role} checkedDates={checkedDates}/>
+                  </div>
                 }
                 <h2 className="account-info-header">Account Info</h2>
                 <div className="account-info">

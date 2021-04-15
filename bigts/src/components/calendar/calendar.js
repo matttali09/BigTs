@@ -31,8 +31,10 @@ function CalendarFun(props) {
 
   // component did mount equivalent for function components hook
   useEffect(() => {
+    console.log("this ran")
     // code to run on component mount
     checkUserSchedule(null);
+    console.log("this ran")
     
     // ignore missing dependency warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,10 +65,12 @@ function CalendarFun(props) {
 
 
     API.getUsers().then(response => {
-      // console.log(response);
-      // console.log(response.data);
+      console.log(response);
+      console.log(response.data);
       response.data.forEach(user => { 
-        // console.log(user);
+        console.log(user);
+        try {
+        if (user.scheduled !== []) {
         user.scheduled.forEach(scheduledDate => {
           if (user) {
             if (props.role === "admin") {
@@ -105,9 +109,16 @@ function CalendarFun(props) {
             }
           }
         })
+      }
+    }
+    catch (e) {
+      console.log("checkUserSchedule error")
+      console.log(e);
+    }
       })
       // inside the .then of users retrieval
       if (formatedValue && isDateAfterToday(formatedValue)) {
+        console.log("setModal entry for date after today")
         setModal(formatedValue, usersScheduledDates);
       } else if (formatedValue) {
         setModalMessage("BUT THE DATE SELECTED IS BEFORE TODAY");
@@ -118,71 +129,93 @@ function CalendarFun(props) {
   }
 
   function isDateAfterToday(date) {
+    try {
     date = new Date(date);
     return new Date(date.toDateString()) >= new Date(new Date().toDateString());
+    } catch (e) {
+      console.log("isDateAfterToday error");
+
+      console.log(e);
+    }
   }
 
   const setModal = (formatedDate, usersScheduledDates) => {
-
-    for (let scheduledDate of usersScheduledDates) {
-      console.log("scheduledDate");
-      console.log(scheduledDate);
-      if (props.role === "admin") {
-        if (formatedDate === scheduledDate.date && scheduledDate.approved) {
-          // set message for approved date selected by admin
-          setModalMessage(adminDateApprovedMessage);
-          setCancelUserename(scheduledDate.username);
-          setCancelModal(true);
-          setOpenModal(false);
-          break;
-        } else if (formatedDate === scheduledDate.date) {
-          // set message for admin selected date not approved
-          setModalMessage(adminDateUnapprovedMessage);
-          setCancelUserename(scheduledDate.username);
-          setCancelModal(true);
-          setOpenModal(false);
-          break;
-        } else {
-          // set message for non-scheduled dates
-          setModalMessage(adminDateNotScheduledMessage);
-          setModalOptions(true);
-          setOpenModal(true);
-        }
-      } else {
-        console.log(formatedDate)
-        console.log(scheduledDate.date)
-        if (userName) {
-          if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
-            // message for approved date selected same user
-            setModalMessage(userAcceptedMessage);
-            setModalOptions(false); 
-            setOpenModal(true);
-            break;
-          } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
-            // message for not approved selected same user
-            setModalMessage(userUnacceptedMessage);
-            setModalOptions(false);
-            setOpenModal(true);
+    try {
+      console.log(usersScheduledDates)
+    if (usersScheduledDates !== []) {
+      for (let scheduledDate of usersScheduledDates) {
+        console.log("scheduledDate");
+        console.log(scheduledDate);
+        if (props.role === "admin") {
+          if (formatedDate === scheduledDate.date && scheduledDate.approved) {
+            // set message for approved date selected by admin
+            setModalMessage(adminDateApprovedMessage);
+            setCancelUserename(scheduledDate.username);
+            setCancelModal(true);
+            setOpenModal(false);
             break;
           } else if (formatedDate === scheduledDate.date) {
-            // message for scheduledDate selected not same user
-            setModalMessage(unavailableMessage);
-            setModalOptions(false);
-            setOpenModal(true);
+            // set message for admin selected date not approved
+            setModalMessage(adminDateUnapprovedMessage);
+            setCancelUserename(scheduledDate.username);
+            setCancelModal(true);
+            setOpenModal(false);
             break;
           } else {
-            // message for day available
-            setModalMessage(availableMessage);
+            // set message for non-scheduled dates
+            setModalMessage(adminDateNotScheduledMessage);
             setModalOptions(true);
             setOpenModal(true);
           }
+        } else {
+          console.log(formatedDate)
+          console.log(scheduledDate.date)
+          if (userName) {
+            if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
+              // message for approved date selected same user
+              setModalMessage(userAcceptedMessage);
+              setModalOptions(false); 
+              setOpenModal(true);
+              break;
+            } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
+              // message for not approved selected same user
+              setModalMessage(userUnacceptedMessage);
+              setModalOptions(false);
+              setOpenModal(true);
+              break;
+            } else if (formatedDate === scheduledDate.date) {
+              // message for scheduledDate selected not same user
+              setModalMessage(unavailableMessage);
+              setModalOptions(false);
+              setOpenModal(true);
+              break;
+            } else {
+              // message for day available
+              console.log("THIS RAN1");
+              setModalMessage(availableMessage);
+              setModalOptions(true);
+              setOpenModal(true);
+            }
+          }
         }
       }
+    } else {
+      // message for day available
+      console.log("THIS RAN2");
+      setModalMessage(availableMessage);
+      setModalOptions(true);
+      setOpenModal(true);
+    }
+  }
+    catch (e) {
+      console.log("checkUserSchedule error");
+      console.log(e);
     }
   }
 
   const findElAndColor = (date, color) => {
-    // console.log(date)
+    try {
+    console.log(date)
     const element = componentRef.current.querySelector(`abbr[aria-label='${date}'`);
     if (element) {
       let par = element.parentNode
@@ -195,6 +228,10 @@ function CalendarFun(props) {
     } else {
       console.log("date not found;");
     }
+  } catch (e) {
+    console.log("findElAndColor")
+    console.log(e)
+  }
   }
 
   // const handleCalendarClick = () => {

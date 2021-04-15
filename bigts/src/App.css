@@ -288,7 +288,7 @@ abbr[title] {
   font-size: 22px;
 }
 
-/* =========================== TABLE Styling =========================== */
+/* =========================== Account Page Styling =========================== */
 .date {
   text-decoration: underline;
 }
@@ -332,6 +332,9 @@ abbr[title] {
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.info-text {
+  background:rgba(0, 0, 0, 0);
 }
 .date-text {
   color: #00ff72;
