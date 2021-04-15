@@ -311,6 +311,7 @@ abbr[title] {
   color: white;
 }
 .dates-table p {
+  cursor: pointer;
   margin: 20px;
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
   border-bottom: 1px dashed white;
@@ -334,7 +335,9 @@ abbr[title] {
   padding-bottom: 10px;
 }
 .info-text {
-  background:rgba(0, 0, 0, 0);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background:black;
 }
 .date-text {
   color: #00ff72;

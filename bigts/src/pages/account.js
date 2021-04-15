@@ -91,12 +91,11 @@ export default function AccountPage(props) {
     return (
         <div className="container mainContent">
             <div className="center">
-            <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 <h2>Scheduled Dates</h2>
                 {!dates.length ? 
                 <p>No dates have been scheduled yet.</p>
                 : <div>
-                    <p className="info-text">In order to cancel date simply click on the one you would like to cancel</p>
+                    <p className="info-text">Click on date in order to cancel.</p>
                     <DatesTable username={userName} dates={dates} role={role} checkedDates={checkedDates}/>
                   </div>
                 }
@@ -125,7 +124,6 @@ export default function AccountPage(props) {
                         </div>
                     </div>
                 </div>
-                <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 {openModal &&
                     <PasswordModal 
                     message={modalMessage}

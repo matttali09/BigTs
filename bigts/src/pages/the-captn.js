@@ -2,7 +2,6 @@
 const CaptnPage = () => (
     <div className="container mainContent">
         <center>
-                <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                 <h3 className="page-head">The Capt'n Page!</h3>
             <div>
                 <img className="main-img" src="../images/Black-Grouper.JPG" alt="Big Ts Captain"></img>
@@ -14,7 +13,6 @@ const CaptnPage = () => (
                     Now he spends most of his time on the water with people like you.
                     </p>
             </div>
-            <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
         </center>
     </div>
 );

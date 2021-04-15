@@ -75,7 +75,10 @@ class Nav extends Component {
                                 </Link>
                             </div>
                         )}
-                    <div data-target="slide-out" className="btn btn-link waves-effect sidenav-trigger hide-on-large-and-up"><i className="text-secondary material-icons">menu</i></div>
+                    <div data-target="slide-out" className="btn btn-link waves-effect sidenav-trigger hide-on-large-and-up">
+                        <i className="text-secondary material-icons">menu</i>
+                        {/* <p>MENU</p> */}
+                    </div>
                     <ul id="slide-out" className="sidenav">
                         {loggedIn ? (
                             <>
