@@ -85,8 +85,8 @@ nav .btn-link {
 }
 nav .btn-link.sidenav-trigger{
   margin: 0;
-  height: 100%;
-  width: 100%;
+  height: 6rem;
+  width: 73%;
 }
 nav .brand:active {
   background: #2bbbad !important;
@@ -109,6 +109,19 @@ nav .brand:active {
 .sidenav-trigger {
   height: 100%;
 }
+.sidenav-trigger:hover {
+  box-shadow: 0 0 10px 5px rgb(60 165 194 / 80%);
+}
+.nav-container {
+  height: 6rem;
+}
+nav .logo-img {
+  margin: 0;
+  height: 6rem;
+  float: left;
+  width: 27%;
+  cursor: pointer;
+}
 .sidenav {
   background-color: #2f3738;
 }
@@ -127,6 +140,13 @@ nav .brand:active {
   float: right;
   margin-right: 10%;
   color: rgba(255, 255, 255, 0.8);
+}
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+.menu-txt {
+
 }
 
 /* =========================== LOGIN styling =========================== */

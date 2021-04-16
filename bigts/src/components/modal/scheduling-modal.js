@@ -235,7 +235,7 @@ export default function MyModal(props) {
           break;
         } else {
           // message for day available
-          setModalMessage("Great Just Confirm Your Adventure Now!")
+          setModalMessage("CONFIRM YOUR REQUEST.")
           setModalOptions(true);
         }
       }
