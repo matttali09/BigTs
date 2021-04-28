@@ -268,7 +268,7 @@ export default function MyModal(props) {
             
             <div className="modal-text">{props.message}</div>
             {props.message === "Go Ahead and Pick your date now!"  && 
-              <input type="date" name="date" onChange={formatDate}/>
+              <input id="date-input" type="date" name="date" onChange={formatDate}/>
             }
             {modalMessage  && 
               <div className="modal-text">{modalMessage}</div>

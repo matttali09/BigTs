@@ -472,13 +472,13 @@ abbr[title] {
 .btn-wrap {
   margin-bottom: 2rem;
 }
-input[type="date"] {
-  background-color: #fafafa8f !important;
+#date-input {
+  background-color: #8abb2b3d !important;
   border-radius: 6px;
-  font-size: x-small;
+  font-size: x-large;
   align-content: center;
   text-align-last: center;
-  color: white;
+  color: #4cafa1;
   margin-bottom: 2rem !important;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
