@@ -11,6 +11,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require("mongoose");
 const routes = require("./routes");
 
+require('dotenv').config();
+
 // setup port then express as app
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -61,7 +63,7 @@ passport.deserializeUser(User.deserializeUser());
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/bigtsuserlist", 
 // {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
-mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://dbUser:CloudyDay8823@BigTs.1bjae.mongodb.net/BigTs?retryWrites=true&w=majority", 
+mongoose.connect(process.env.MONGODB_URI, 
 {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
 
 // development and production errorhandling

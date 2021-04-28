@@ -1,5 +1,6 @@
 import React , { useRef } from "react";
 import Modal from 'react-modal';
+import AcceptedModal from "./Accepted-Modal.js"
 import API from "../../utils/API";
 
 const customStyles = {
@@ -27,9 +28,11 @@ const customStyles = {
 export default function MyModal(props) {
   var subtitle;
 
-  const [modalIsOpen,setIsOpen] = React.useState(true);
+  const [modalIsOpen, setIsOpen] = React.useState(true);
   const [modalOptions, setModalOptions] = React.useState(true);
   const [formatedDate, setFormatedDate] = React.useState(true);
+
+  const [AcceptedModalOpen, setAcceptedModalOpen] = React.useState(false);
 
   const [userInfo, setUserInfo] = React.useState(false);
   const [modalMessage, setModalMessage] = React.useState(false);
@@ -58,8 +61,10 @@ export default function MyModal(props) {
   function scheduleAndCloseModal (event) {
     try {
     if (props.findElAndColor && props.formatedDate && userName) {
+      console.log("THIS RAN5");
+      setAcceptedModalOpen(true);
       // props.scheduled = {date: props.formatedDate, approved: true}
-      props.findElAndColor(props.formatedDate, "#008074");
+      props.findElAndColor(props.formatedDate, "#008021");
 
       API.getUser(userName).then(response => {
         console.log(response.data.scheduled)
@@ -92,6 +97,7 @@ export default function MyModal(props) {
 
     }
     
+    setAcceptedModalOpen(true);
     closeModal();
   } catch (e) {
     console.log("scheduleAndCloseModal");
@@ -277,6 +283,12 @@ export default function MyModal(props) {
             )}
             
           </Modal>
+          {AcceptedModalOpen &&
+            <AcceptedModal 
+              closeModalHandler={setAcceptedModalOpen}
+              username={userName}
+            />
+          }
         </div>
       </div>
     );

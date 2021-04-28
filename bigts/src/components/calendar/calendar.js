@@ -77,7 +77,7 @@ function CalendarFun(props) {
               if (scheduledDate.approved) {
                 scheduledDate.username = user.username;
                 usersScheduledDates.push(scheduledDate);
-                findElAndColor(scheduledDate.date, "#008074");
+                findElAndColor(scheduledDate.date, "#008021");
               } else {
                 scheduledDate.username = user.username;
                 usersScheduledDates.push(scheduledDate);
@@ -91,7 +91,7 @@ function CalendarFun(props) {
                 if (scheduledDate.approved && user.username === userName.toLowerCase()) {
                   scheduledDate.username = user.username;;
                   usersScheduledDates.push(scheduledDate);
-                  findElAndColor(scheduledDate.date, "#008074");
+                  findElAndColor(scheduledDate.date, "#008021");
 
                   // scheduled date for this user which has not been approved
                 } else if (!scheduledDate.approved && user.username === userName.toLowerCase()) {
