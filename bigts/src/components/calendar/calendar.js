@@ -174,8 +174,9 @@ function CalendarFun(props) {
             if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
               // message for approved date selected same user
               setModalMessage(userAcceptedMessage);
-              setModalOptions(false); 
-              setOpenModal(true);
+              setModalOptions(false);
+              setCancelModal(true);
+              setOpenModal(false);
               break;
             } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
               // message for not approved selected same user
@@ -262,7 +263,7 @@ function CalendarFun(props) {
       {cancelModal &&
         <CancelModal 
         formatedDate={formatedDate}
-        username={cancelUsername}
+        username={cancelUsername || userName}
         closeModalHandler={setCancelModal}
         checkUserSchedule={checkUserSchedule}
         findElAndColor={findElAndColor}

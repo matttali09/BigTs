@@ -46,9 +46,13 @@ export default function MyModal(props) {
   }
 
   const cancelAndCloseModal = () => {
+    try {
+
+      console.log(userName)
 
     API.getUser(userName).then(response => {
-        console.log(response.data.scheduled)
+        console.log(response);
+        console.log(response.data.scheduled);
         if (response.data.scheduled) {
             let filtered = response.data.scheduled.filter(function (value, index, arr) {
                 return value.date !== props.formatedDate;
@@ -63,6 +67,10 @@ export default function MyModal(props) {
             })
         }
     })
+    } catch (e) {
+      console.log("cancel and close error!")
+      console.error(e)
+    }
     closeModal();
   }
  
