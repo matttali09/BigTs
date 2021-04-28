@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import API from '../../utils/API.js';
 import SchedulingModal from "../modal/scheduling-modal.js";
 import CancelModal from "../modal/cancel-modal.js";
+import Loader from "../../utils/loader.js"
  
 function CalendarFun(props) {
   // declare value hooks
@@ -13,6 +14,7 @@ function CalendarFun(props) {
   const [userInfo, setUserInfo] = useState({});
   const [formatedDate, setFormatedDate] = useState("");
   const [modalOptions, setModalOptions] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   // set modalMessage with hook and initialize variables for messages here for readability
   const availableMessage = "THE DATE YOU HAVE SELECTED IS AVAILABLE WOULD YOU LIKE TO SCHEDULE IT?";
@@ -59,6 +61,7 @@ function CalendarFun(props) {
   // Get all users scheduled dates together and checka it
   // against the full schedule and then individual schedule
   const checkUserSchedule = formatedValue => {
+    setShowLoader(true);
     let usersScheduledDates = [];
 
     setUserInfo({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: "EO"}})
@@ -68,53 +71,55 @@ function CalendarFun(props) {
       console.log(response);
       console.log(response.data);
       response.data.forEach(user => { 
-        console.log(user);
-        try {
+      console.log(user);
+      try {
         if (user.scheduled !== []) {
-        user.scheduled.forEach(scheduledDate => {
-          if (user) {
-            if (props.role === "admin") {
-              if (scheduledDate.approved) {
-                scheduledDate.username = user.username;
-                usersScheduledDates.push(scheduledDate);
-                findElAndColor(scheduledDate.date, "#008021");
-              } else {
-                scheduledDate.username = user.username;
-                usersScheduledDates.push(scheduledDate);
-                findElAndColor(scheduledDate.date, "#ff8100");
-              }
-
-            // for regular users
-            } else {
-              // scheduled date for this user which has been approved
-              if (userName) {
-                if (scheduledDate.approved && user.username === userName.toLowerCase()) {
-                  scheduledDate.username = user.username;;
+          user.scheduled.forEach(scheduledDate => {
+            if (user) {
+              if (props.role === "admin") {
+                if (scheduledDate.approved) {
+                  scheduledDate.username = user.username;
                   usersScheduledDates.push(scheduledDate);
                   findElAndColor(scheduledDate.date, "#008021");
-
-                  // scheduled date for this user which has not been approved
-                } else if (!scheduledDate.approved && user.username === userName.toLowerCase()) {
-                  scheduledDate.username = user.username;
-                  usersScheduledDates.push(scheduledDate)
-                  findElAndColor(scheduledDate.date, "#ff8100");
-                
-                  // scheduled date for a different user which has not been approved
                 } else {
                   scheduledDate.username = user.username;
-                  usersScheduledDates.push(scheduledDate)
-                  findElAndColor(scheduledDate.date, "#444");
+                  usersScheduledDates.push(scheduledDate);
+                  findElAndColor(scheduledDate.date, "#ff8100");
+                }
+
+              // for regular users
+              } else {
+                // scheduled date for this user which has been approved
+                if (userName) {
+                  if (scheduledDate.approved && user.username === userName.toLowerCase()) {
+                    scheduledDate.username = user.username;;
+                    usersScheduledDates.push(scheduledDate);
+                    findElAndColor(scheduledDate.date, "#008021");
+
+                    // scheduled date for this user which has not been approved
+                  } else if (!scheduledDate.approved && user.username === userName.toLowerCase()) {
+                    scheduledDate.username = user.username;
+                    usersScheduledDates.push(scheduledDate)
+                    findElAndColor(scheduledDate.date, "#ff8100");
+                  
+                    // scheduled date for a different user which has not been approved
+                  } else {
+                    scheduledDate.username = user.username;
+                    usersScheduledDates.push(scheduledDate)
+                    findElAndColor(scheduledDate.date, "#444");
+                  }
                 }
               }
             }
-          }
-        })
+          })
+        }
+      if (!formatedValue){
+        setShowLoader(false);
       }
-    }
-    catch (e) {
-      console.log("checkUserSchedule error")
-      console.log(e);
-    }
+      } catch (e) {
+          console.log("checkUserSchedule error")
+          console.log(e);
+        }
       })
       // inside the .then of users retrieval
       if (formatedValue && isDateAfterToday(formatedValue)) {
@@ -125,6 +130,9 @@ function CalendarFun(props) {
         setModalOptions(false);
         setOpenModal(true);
       }
+    }).catch(e => {
+      console.log("API get error")
+      console.log(e);
     })
   }
 
@@ -153,6 +161,7 @@ function CalendarFun(props) {
             setCancelUserename(scheduledDate.username);
             setCancelModal(true);
             setOpenModal(false);
+            setShowLoader(false);
             break;
           } else if (formatedDate === scheduledDate.date) {
             // set message for admin selected date not approved
@@ -160,12 +169,14 @@ function CalendarFun(props) {
             setCancelUserename(scheduledDate.username);
             setCancelModal(true);
             setOpenModal(false);
+            setShowLoader(false);
             break;
           } else {
             // set message for non-scheduled dates
             setModalMessage(adminDateNotScheduledMessage);
             setModalOptions(true);
             setOpenModal(true);
+            setShowLoader(false);
           }
         } else {
           console.log(formatedDate)
@@ -177,18 +188,21 @@ function CalendarFun(props) {
               setModalOptions(false);
               setCancelModal(true);
               setOpenModal(false);
+              setShowLoader(false);
               break;
             } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
               // message for not approved selected same user
               setModalMessage(userUnacceptedMessage);
               setModalOptions(false);
               setOpenModal(true);
+              setShowLoader(false);
               break;
             } else if (formatedDate === scheduledDate.date) {
               // message for scheduledDate selected not same user
               setModalMessage(unavailableMessage);
               setModalOptions(false);
               setOpenModal(true);
+              setShowLoader(false);
               break;
             } else {
               // message for day available
@@ -196,6 +210,7 @@ function CalendarFun(props) {
               setModalMessage(availableMessage);
               setModalOptions(true);
               setOpenModal(true);
+              setShowLoader(false);
             }
           }
         }
@@ -247,7 +262,9 @@ function CalendarFun(props) {
         onChange={onChange}
         value={value}
       />
-
+      {showLoader && 
+        <Loader/>
+        }
       {openModal &&
         <SchedulingModal 
           message={modalMessage}

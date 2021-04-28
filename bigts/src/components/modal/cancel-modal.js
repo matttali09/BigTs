@@ -90,7 +90,7 @@ export default function MyModal(props) {
             <div className="modal-text">{props.formatedDate}</div>
             <div className="schedule-btns">
                 <button className="yes-btn" onClick={cancelAndCloseModal}>Confirm</button>
-                <button className="cancel-btn" onClick={closeModal}>Cancel</button>
+                <button className="cancel-btn" onClick={closeModal}>Keep</button>
             </div>   
           </Modal>
         </div>

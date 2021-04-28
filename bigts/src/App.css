@@ -505,6 +505,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background:black
 }
 
+/* =========================== LOADER Styling =========================== */
+.loader {
+  background:rgb(0, 0, 0);
+  background:rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 50%;
+  left: 40vw;
+}
+
 /* =========================== FOOTER Styling =========================== */
 #footer {
   background-color: #647678;
