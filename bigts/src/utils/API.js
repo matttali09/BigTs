@@ -28,6 +28,15 @@ const API = {
   },
   signOutUser: function() {
     return axios.post("/api/users/logout");
+  },
+  // handles calls to the email API 
+  // must receive name, email, and message as parameters
+  handleEmail: async function(name, email, message) {
+    return await axios.post('api/emailAPI', {
+      name,
+      email,
+      message
+    })
   }
 };
 

@@ -1,8 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import API from '../../utils/API.js';
+
+// import modals
 import SchedulingModal from "../modal/scheduling-modal.js";
 import CancelModal from "../modal/cancel-modal.js";
+import AcceptedModal from "../modal/Accepted-Modal.js"
+
+// import loader
 import Loader from "../../utils/loader.js"
  
 function CalendarFun(props) {
@@ -10,6 +15,7 @@ function CalendarFun(props) {
   const [value, setValue] = useState(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
+  const [acceptedModal, setAcceptedModal] = useState(false);
   const [cancelUsername, setCancelUserename] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [formatedDate, setFormatedDate] = useState("");
@@ -268,6 +274,7 @@ function CalendarFun(props) {
       {openModal &&
         <SchedulingModal 
           message={modalMessage}
+          openAcceptedModal={setAcceptedModal}
           closeModalHandler={setOpenModal}
           userInfo={userInfo}
           updateUser={setUserInfo}
@@ -284,6 +291,12 @@ function CalendarFun(props) {
         closeModalHandler={setCancelModal}
         checkUserSchedule={checkUserSchedule}
         findElAndColor={findElAndColor}
+      />
+      }
+      {acceptedModal &&
+        <AcceptedModal 
+          closeModalHandler={setAcceptedModal}
+          formatedDate={formatedDate}
       />
       }
     </div>

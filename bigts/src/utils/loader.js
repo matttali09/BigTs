@@ -1,6 +1,5 @@
 import React , { useRef } from "react";
 import gsap from 'gsap';
-import Modal from 'react-modal';
 
 export default function MyLoader(props) {
   const blue = useRef(null);

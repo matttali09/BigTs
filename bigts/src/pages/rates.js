@@ -30,6 +30,7 @@ const RatesPage = (props) => {
     const [modalOptions, setModalOptions] = useState(true);
 
     const handleClick = (event) => {
+        console.log(openModal)
         setOpenModal(true);
         console.log(event.target.id)
         setModalKey(event.target.id)
