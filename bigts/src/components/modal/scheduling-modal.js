@@ -1,6 +1,5 @@
 import React , { useRef } from "react";
 import Modal from 'react-modal';
-import AcceptedModal from "./Accepted-Modal.js"
 import API from "../../utils/API";
 
 const customStyles = {
@@ -32,8 +31,6 @@ export default function MyModal(props) {
   const [modalOptions, setModalOptions] = React.useState(true);
   const [formatedDate, setFormatedDate] = React.useState(true);
 
-  const [AcceptedModalOpen, setAcceptedModalOpen] = React.useState(false);
-
   const [userInfo, setUserInfo] = React.useState(false);
   const [modalMessage, setModalMessage] = React.useState(false);
 
@@ -60,52 +57,70 @@ export default function MyModal(props) {
 
   function scheduleAndCloseModal (event) {
     try {
-    if (props.findElAndColor && props.formatedDate && userName) {
-      console.log("THIS RAN5");
-      setAcceptedModalOpen(true);
-      // props.scheduled = {date: props.formatedDate, approved: true}
-      props.findElAndColor(props.formatedDate, "#008021");
+      // important part here is findElAndColor and props.formatedDate which 
+      // means it is part of the Calendar
+      if (props.findElAndColor && props.formatedDate && userName) {
+        console.log("THIS RAN5");
+        // props.scheduled = {date: props.formatedDate, approved: true}
+        props.findElAndColor(props.formatedDate, "#008021");
 
-      API.getUser(userName).then(response => {
-        console.log(response.data.scheduled)
-        let userData = response.data.scheduled;
-        userData.push({date: props.formatedDate, approved: true, username: userName, typeKey: "EO"})
-        console.log("userData")
-        console.log(userData)
-        API.updateUser(userName, {scheduled: userData}).then(response => {
-          console.log("response")
-          console.log(response)
+        API.getUser(userName).then(response => {
+          console.log(response.data.scheduled)
+          let userData = response.data.scheduled;
+          const userEmail = response.data.email;
+
+          userData.push({date: props.formatedDate, approved: true, username: userName, typeKey: "EO"})
+          console.log("userData");
+          console.log(userData);
+
+          API.updateUser(userName, {scheduled: userData}).then(response => {
+            // on good response set Accepted modal to open snd send confirmation email.
+            props.openAcceptedModal(true);
+            // emailAPI takes in the scheduled for message and controls message sent
+            sendEmail(userEmail, props.formatedDate);
+            console.log("response")
+            console.log(response)
+          })
         })
-      })
 
+        // else for rates page since formated date is chosen on the modal
+      } else {
+
+        console.log("THIS RAN6")
+        API.getUser(userName).then(response => {
+          console.log(response.data.scheduled)
+          let userData = response.data.scheduled;
+          userData.push({date: formatedDate, approved: true, username: userName, typeKey: "EO"})
+          console.log("userData")
+          console.log(userData)
+          API.updateUser(userName, {scheduled: userData}).then(response => {
+            // props.openAcceptedModal(true);
+            console.log("response")
+            console.log(response)
+          })
+        })
+
+      }
       
-
-    } else {
-
-      console.log("THIS RAN6")
-      API.getUser(userName).then(response => {
-        console.log(response.data.scheduled)
-        let userData = response.data.scheduled;
-        userData.push({date: formatedDate, approved: true, username: userName, typeKey: "EO"})
-        console.log("userData")
-        console.log(userData)
-        API.updateUser(userName, {scheduled: userData}).then(response => {
-          console.log("response")
-          console.log(response)
-        })
-      })
-
+      closeModal();
+    } catch (e) {
+      console.log("scheduleAndCloseModal Error");
+      console.log(e);
     }
-    
-    setAcceptedModalOpen(true);
-    closeModal();
-  } catch (e) {
-    console.log("scheduleAndCloseModal");
-    console.log(e);
-  }
   }
 
-  // move to 
+  // email function 
+  function sendEmail(email, formatedDate) {
+    const name = userName;
+    const message = `Your date with BigTsCharters has been scheduled and confirmed for ${formatedDate}!`
+    
+    API.handleEmail(name, email, message).then(response => {
+      console.log("response");
+      console.log(response);
+    })
+  }
+
+  // for rates page
   function formatDate(event) {
     try {
     let thisValue = new Date(event.target.value);
@@ -126,6 +141,7 @@ export default function MyModal(props) {
     }
   }
 
+  // for rates page
   const checkUserSchedule = formatedValue => {
     try {
     let usersScheduledDates = [];
@@ -190,6 +206,7 @@ export default function MyModal(props) {
   }
   }
 
+  // for rates page
   function isDateAfterToday(date) {
     if (date) {
     date = new Date(date);
@@ -199,6 +216,7 @@ export default function MyModal(props) {
     }
   }
 
+  // for rates page
   const setModal = (formatedDate, usersScheduledDates) => {
     try {
 
@@ -283,12 +301,6 @@ export default function MyModal(props) {
             )}
             
           </Modal>
-          {AcceptedModalOpen &&
-            <AcceptedModal 
-              closeModalHandler={setAcceptedModalOpen}
-              username={userName}
-            />
-          }
         </div>
       </div>
     );
