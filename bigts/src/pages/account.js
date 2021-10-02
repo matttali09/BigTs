@@ -28,13 +28,15 @@ export default function AccountPage(props) {
                 let checkedDatesObj = checkedDates;
                 response.data.forEach(user => {
                     user.scheduled.forEach(scheduledDate => {
-                        scheduledDate["name"] = user.username
-                        scheduledDate["number"] = user.number
-                        scheduledDate["email"] = user.email
-                        // console.log("scheduledDate");
-                        // console.log(scheduledDate);
-                        datesArr.push(scheduledDate);
-                        checkedDatesObj[scheduledDate.date] = scheduledDate.approved
+                        if (isDateAfterToday(scheduledDate["date"])) {
+                            scheduledDate["name"] = user.username
+                            scheduledDate["number"] = user.number
+                            scheduledDate["email"] = user.email
+                            // console.log("scheduledDate");
+                            // console.log(scheduledDate);
+                            datesArr.push(scheduledDate);
+                            checkedDatesObj[scheduledDate.date] = scheduledDate.approved
+                        }
                     })
                 });
                 let sortedDatesArr = sortScheduledDates(datesArr);
@@ -73,8 +75,8 @@ export default function AccountPage(props) {
         let newDateArr = [];
         // console.log(scheduled);
         scheduled.forEach(dateObj => {
-            let newFormat = dateObj
-            newFormat["date"] = new Date(dateObj.date)
+            let newFormat = dateObj;
+            newFormat["date"] = new Date(dateObj.date);
             newDateArr.push(newFormat);
         })
         let newDateArrSorted = newDateArr.sort(function (a, b) {
@@ -86,6 +88,17 @@ export default function AccountPage(props) {
         })
         // console.log(newArrayMapped);
         return newArrayMapped;
+    }
+
+    function isDateAfterToday(date) {
+        try {
+        date = new Date(date);
+        return new Date(date.toDateString()) >= new Date(new Date().toDateString());
+        } catch (e) {
+          console.log("isDateAfterToday error");
+    
+          console.log(e);
+        }
     }
 
     return (
