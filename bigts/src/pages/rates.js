@@ -7,12 +7,13 @@ const RatesPage = (props) => {
 
     const [userInfo, setUserInfo] = useState(props.user);
     const [modalKey, setModalKey] = useState(null);
+    const userName = props.user;
 
     // component did mount equivalent for function components hook
     useEffect(() => {
         // code to run on component mount
-        if (props.user)
-            API.getUser(props.user).then(response => {
+        if (userName)
+            API.getUser(userName).then(response => {
                 setUserInfo(response.data.scheduled)
                 console.log(userInfo);
             })
@@ -24,6 +25,7 @@ const RatesPage = (props) => {
     const [openModal, setOpenModal] = useState(false);
 
     const pickDateMessage = "Go Ahead and Pick your date now!";
+    const pleaseLoginMessage = <span>PLEASE LOGIN OR CREATE ACCOUNT TO SCHEDULE A DATE. <br/>Contact Us Now <span className="phone-text"><br/><a href="tel:8509057203">Phone: (850) 905-7203</a></span> <span className="email-text"><br/><a target="_blank" rel="noreferrer" href="mailto: bigtscharters@gmail.com">Email: BigTsCharters@gmail.com</a></span></span>;
 
     const[modalMessage, setModalMessage] = useState(pickDateMessage);
 
@@ -37,9 +39,12 @@ const RatesPage = (props) => {
         if (event.target.id === "contact") {
             setModalOptions(false);
             setModalMessage(<span>Contact Us Now <span className="phone-text"><br/><a href="tel:8509057203">Phone: (850) 905-7203</a></span> <span className="email-text"><br/><a target="_blank" rel="noreferrer" href="mailto: bigtscharters@gmail.com">Email: BigTsCharters@gmail.com</a></span></span>);
-        } else {
+        } else if (userName) {
             setModalOptions(true);
             setModalMessage(pickDateMessage);
+        } else {
+            setModalOptions(false);
+            setModalMessage(pleaseLoginMessage);
         }
     }
    

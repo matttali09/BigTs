@@ -36,20 +36,33 @@ class Nav extends Component {
         return (
             <header className="App-header" id="nav-container">
                 <nav>
-                    {/* if logged in show this on navbar :else */}
-                    {loggedIn ? (
-                        <div className="hide-on-med-and-down">
-                            <Link to="/home" className="btn brand waves-effect">
+                    {/* Navbar Displayed on larger screens */}
+                    <div className="hide-on-med-and-down">
+                        <Link to="/home" className="btn brand waves-effect">
                                 <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
-                            </Link>
-                            
-                            <Link to="/signin" className="btn btn-link waves-effect text-secondary center" onClick={this.logout}>
-                                <span className="text-secondary">Logout</span>
-                            </Link>
-                            <Link to="/account" className="btn btn-link waves-effect text-secondary center">
-                                <span className="text-secondary">Account</span>
-                            </Link>
-                            <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
+                        </Link>
+
+                        {/* Logged in dependent Navigation buttons */}
+                        {loggedIn ? (
+                            <>
+                                <Link to="/signin" className="btn btn-link waves-effect text-secondary center" onClick={this.logout}>
+                                    <span className="text-secondary">Logout</span>
+                                </Link>
+                                <Link to="/account" className="btn btn-link waves-effect text-secondary center">
+                                    <span className="text-secondary">Account</span>
+                                </Link>    
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/create-account" className="btn btn-link waves-effect center">
+                                    <span className="text-secondary">Create Account</span>
+                                </Link>
+                                <Link to="/signin" className="btn btn-link waves-effect text-secondary center">
+                                    <span className="text-secondary">Login</span>
+                                </Link>
+                            </>
+                        )}
+                        <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">The Boat</span>
                             </Link>
                             <Link to="/captain" className="btn btn-link waves-effect text-secondary center">
@@ -60,76 +73,63 @@ class Nav extends Component {
                             </Link>
                             <Link to="/scheduling" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Scheduling</span>
-                            </Link>
-                        </div>
-                    ) : (
-                            <div className="hide-on-med-and-down">
-                                <Link to="/home" className="btn brand waves-effect">
-                                    <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
-                                </Link>
-                                <Link to="/create-account" className="btn btn-link waves-effect center">
-                                    <span className="text-secondary">Create Account</span>
-                                </Link>
-                                <Link to="/signin" className="btn btn-link waves-effect text-secondary center">
-                                    <span className="text-secondary">Login</span>
-                                </Link>
-                            </div>
-                        )}
+                        </Link>
+                    </div>
+                    
+                    {/* LOGO and Slider Displayed on small screens */}
                     <div className="hide-on-large-and-up">
-                    <Link to="/home" className="">
-                        <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big T's Logo"></img>
-                    </Link>
+                        <Link to="/home" className="">
+                            <img className="logo-img" src="../images/BigTs-logo.PNG" alt="Big T's Logo"></img>
+                        </Link>
+                        <div data-target="slide-out" className="btn btn-link waves-effect sidenav-trigger">
+                            <span className="menu-txt">Menu</span><i className="text-secondary material-icons">menu</i> 
+                        </div>
                     </div>
-                    <div data-target="slide-out" className="btn btn-link waves-effect sidenav-trigger hide-on-large-and-up">
-                        <span className="menu-txt">Menu</span><i className="text-secondary material-icons">menu</i> 
-                    </div>
+                    
+                    {/* Slide Out Menu */}
                     <ul id="slide-out" className="sidenav">
+                        <Link to="/home" className="waves-effect sidenav-close">
+                            <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
+                        </Link>
+                        <Link to="/scheduling" className="waves-effect sidenav-close">
+                            <span>Scheduling</span>
+                        </Link>
+                        <Link to="/rates" className="waves-effect sidenav-close">
+                            <span>Rates</span>
+                        </Link>
+                        <Link to="/captain" className="waves-effect sidenav-close">
+                            <span>The Captain</span>
+                        </Link>
+                        <Link to="/boat" className="waves-effect sidenav-close">
+                            <span>The Boat</span>
+                        </Link>
+
+                        {/* Logged in dependent Navigation buttons */}
                         {loggedIn ? (
-                            <>
-                                <Link to="/home" className="waves-effect sidenav-close">
-                                    <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
-                                </Link>
-                                <Link to="/scheduling" className="waves-effect sidenav-close">
-                                    <span>Scheduling</span>
-                                </Link>
-                                <Link to="/rates" className="waves-effect sidenav-close">
-                                    <span>Rates</span>
-                                </Link>
-                                <Link to="/captain" className="waves-effect sidenav-close">
-                                    <span>The Captain</span>
-                                </Link>
-                                <Link to="/boat" className="waves-effect sidenav-close">
-                                    <span>The Boat</span>
-                                </Link>
-                                <Link to="/account" className="waves-effect sidenav-close">
-                                    <span>Account</span>
-                                </Link>
-                                <Link to="/signin" className="waves-effect sidenav-close" onClick={this.logout}>
-                                    <span>Logout</span>
-                                </Link>
-                                <div className="waves-effect sidenav-close">
-                                    <i className="fas fa-arrow-circle-right"></i>
-                                </div>
-                            </>
+                        <>
+                            <Link to="/account" className="waves-effect sidenav-close">
+                                <span>Account</span>
+                            </Link>
+                            <Link to="/signin" className="waves-effect sidenav-close" onClick={this.logout}>
+                                <span>Logout</span>
+                            </Link>
+                        </>
                         ) : (
-                            <>
-                                <Link to="/home" className="waves-effect sidenav-close">
-                                    <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
-                                </Link>
-                                <Link to="/create-account" className="waves-effect sidenav-close">
-                                    <span>Create Account</span>
-                                </Link>
-                                <Link to="/signin" className="waves-effect sidenav-close">
-                                    <span>Login</span>
-                                </Link>
-                                <div className="waves-effect sidenav-close">
-                                    <i className="fas fa-arrow-circle-right"></i>
-                                </div>
-                            </>
+                        <>
+                            <Link to="/signin" className="waves-effect sidenav-close">
+                                <span>Login</span>
+                            </Link>
+                            <Link to="/create-account" className="waves-effect sidenav-close">
+                                <span>Create Account</span>
+                            </Link>
+                        </>
                         )}
+                        <div className="waves-effect sidenav-close">
+                            <i className="fas fa-arrow-circle-right"></i>
+                        </div>
                     </ul>
                 </nav>
-            </header >
+            </header>
         );
 
     }

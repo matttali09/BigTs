@@ -100,8 +100,8 @@ nav .brand:active {
 .text-secondary {
   position: absolute;
   background: black;
-  left: 15px;
-  right: 15px;
+  left: 9px;
+  right: 9px;
   height: -webkit-fill-available;
 }
 
@@ -211,6 +211,9 @@ img:hover {
   color:firebrick;
 }
 /* =========================== Calendar and Table Styling =========================== */
+.react-calendar {
+  cursor: default;
+}
 .react-calendar__navigation {
   height: 50px;
   font-size: 1.5rem;
@@ -239,6 +242,10 @@ abbr[title] {
 }
 .react-calendar__month-view__days button abbr {
   padding-inline: 3rem;
+}
+.react-calendar__navigation .react-calendar__navigation__arrow, .react-calendar__navigation .react-calendar__navigation__label,
+.react-calendar__month-view__days button  {
+  cursor: pointer;
 }
 
 /* =========================== CAROUSEL Styling =========================== */
