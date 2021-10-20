@@ -108,7 +108,7 @@ export default function AccountPage(props) {
                 {!dates.length ? 
                 <p>No dates have been scheduled yet.</p>
                 : <div>
-                    <p className="info-text">Click on date in order to cancel.</p>
+                    {props.role === "user" && <p className="info-text">Click on date in order to cancel.</p>}
                     <DatesTable username={userName} dates={dates} role={role} checkedDates={checkedDates}/>
                   </div>
                 }

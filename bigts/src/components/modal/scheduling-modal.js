@@ -31,7 +31,6 @@ export default function MyModal(props) {
   const [modalOptions, setModalOptions] = React.useState(true);
   const [formatedDate, setFormatedDate] = React.useState(true);
 
-  const [userInfo, setUserInfo] = React.useState(false);
   const [modalMessage, setModalMessage] = React.useState(false);
 
   const userName = props.username;
@@ -69,7 +68,7 @@ export default function MyModal(props) {
           let userData = response.data.scheduled;
           const userEmail = response.data.email;
 
-          userData.push({date: props.formatedDate, approved: true, username: userName, typeKey: "EO"})
+          userData.push({date: props.formatedDate, approved: true, username: userName, typeKey: props.modalKey ? props.modalKey : "EO"})
           console.log("userData");
           console.log(userData);
 
@@ -90,7 +89,7 @@ export default function MyModal(props) {
         API.getUser(userName).then(response => {
           console.log(response.data.scheduled)
           let userData = response.data.scheduled;
-          userData.push({date: formatedDate, approved: true, username: userName, typeKey: "EO"})
+          userData.push({date: formatedDate, approved: true, username: userName, typeKey: props.modalKey ? props.modalKey : "EO"})
           console.log("userData")
           console.log(userData)
           API.updateUser(userName, {scheduled: userData}).then(response => {
@@ -123,15 +122,12 @@ export default function MyModal(props) {
   // for rates page
   function formatDate(event) {
     try {
-    let thisValue = new Date(event.target.value);
+      // add T00:00:00 to string to avoid date being off by one day less
+    let thisValue = new Date(event.target.value + "T00:00:00");
     const formatedValue = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'long', day: 'numeric'}).format(thisValue);
 
-    console.log("props.user");
-    console.log(props);
-    console.log(userName)
-
-    console.log("userInfo");
-    console.log(userInfo);
+    // console.log("userInfo");
+    // console.log(userInfo);
 
     setFormatedDate(formatedValue)
     checkUserSchedule(formatedValue);
@@ -144,15 +140,9 @@ export default function MyModal(props) {
   // for rates page
   const checkUserSchedule = formatedValue => {
     try {
+      // console.log("formatedValue: ")
+      // console.log(formatedValue)
     let usersScheduledDates = [];
-
-    if (props.modalKey) {
-      setUserInfo({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: props.modalKey}})
-    } else {
-      setUserInfo({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: "EO"}})
-    }
-    console.log({scheduled: {date: formatedValue, approved: true, username: userName, typeKey: "EO"}})
-
 
     API.getUsers().then(response => {
       // console.log(response);
@@ -221,8 +211,8 @@ export default function MyModal(props) {
     try {
 
     for (let scheduledDate of usersScheduledDates) {
-      console.log("scheduledDate");
-      console.log(scheduledDate);
+      // console.log("scheduledDate");
+      // console.log(scheduledDate);
       if (props.role === "admin") {
         if (formatedDate === scheduledDate.date && scheduledDate.approved) {
           // set message for approved date selected by admin
@@ -240,8 +230,8 @@ export default function MyModal(props) {
           setModalOptions(true);
         }
       } else {
-        console.log(formatedDate)
-        console.log(scheduledDate.date)
+        // console.log(formatedDate)
+        // console.log(scheduledDate.date)
         if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
           // message for approved date selected same user
           setModalMessage("You Have Already Been Approved for This Date.")
@@ -282,7 +272,7 @@ export default function MyModal(props) {
             ariaHideApp={false}
             closeTimeoutMS={250}
           >
-            <h2 ref={_subtitle => (subtitle = _subtitle)}>Sounds Great!</h2>
+            <h2 ref={_subtitle => (subtitle = _subtitle)}>{props.header}</h2>
             
             <div className="modal-text">{props.message}</div>
             {props.message === "Go Ahead and Pick your date now!"  && 

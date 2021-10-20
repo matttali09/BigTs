@@ -23,16 +23,19 @@ function CalendarFun(props) {
   const [showLoader, setShowLoader] = useState(false);
 
   // set modalMessage with hook and initialize variables for messages here for readability
+  const soundsGreatHeader = "Sounds Great!";
+  const emptyHeader = "";
   const availableMessage = "THE DATE YOU HAVE SELECTED IS AVAILABLE WOULD YOU LIKE TO SCHEDULE IT?";
-  const unavailableMessage = "BUT THE DATE YOU HAVE SELECTED IS UNAVAILABLE.";
-  const userUnacceptedMessage = "BUT YOU HAVE NOT BEEN APPROVED FOR THIS DATE.";
+  const unavailableMessage = "THE DATE YOU HAVE SELECTED IS UNAVAILABLE.";
+  const userUnacceptedMessage = "YOU HAVE NOT BEEN APPROVED FOR THIS DATE YET.";
   const userAcceptedMessage = "YOU HAVE BEEN APPROVED FOR THIS DATE!";
-  const adminDateApprovedMessage = "YOU HAVE ALREADY APPROVED THIS DATE, WOULD YOU LIKE TO CANCEL IT?";
-  const adminDateUnapprovedMessage = "BUT YOU HAVE NOT APPROVED THIS DATE YET, WOULD YOU LIKE TO CANCEL IT?";
+  const adminDateApprovedMessage = "YOU HAVE APPROVED THIS DATE YET, WOULD YOU LIKE TO CANCEL IT?";
+  const adminDateUnapprovedMessage = "YOU HAVE NOT APPROVED THIS DATE YET, WOULD YOU LIKE TO CANCEL IT?";
   const adminDateNotScheduledMessage = "THIS DATE HAS NOT BEEN SCHEDULED WOULD YOU LIKE TO BLACK IT OUT?";
   const pleaseLoginMessage = <span>PLEASE LOGIN OR CREATE ACCOUNT TO SCHEDULE A DATE. <br/>Contact Us Now <span className="phone-text"><br/><a href="tel:8509057203">Phone: (850) 905-7203</a></span> <span className="email-text"><br/><a target="_blank" rel="noreferrer" href="mailto: bigtscharters@gmail.com">Email: BigTsCharters@gmail.com</a></span></span>;
 
   const [modalMessage, setModalMessage] = React.useState(availableMessage);
+  const [modalHeader, setModalHeader] = React.useState(soundsGreatHeader);
 
   // declare variables and component reference
   const userName = props.user;
@@ -79,13 +82,13 @@ function CalendarFun(props) {
       // console.log(response);
       // console.log(response.data);
       response.data.forEach(user => { 
-      console.log(user);
+      // console.log(user);
       try {
         if (user.scheduled !== []) {
           user.scheduled.forEach(scheduledDate => {
             if (user) {
               if (userRole === "admin") {
-                console.log("THIS RAN")
+                // console.log("THIS RAN")
                 if (scheduledDate.approved) {
                   scheduledDate.username = user.username;
                   usersScheduledDates.push(scheduledDate);
@@ -140,7 +143,8 @@ function CalendarFun(props) {
         setModal(formatedValue, usersScheduledDates);
       } else if (formatedValue && userName) {
         setShowLoader(false);
-        setModalMessage("BUT THE DATE SELECTED IS BEFORE TODAY.");
+        setModalHeader("")
+        setModalMessage("THE DATE SELECTED IS BEFORE TODAY.");
         setModalOptions(false);
         setOpenModal(true);
       } else if (formatedValue) {
@@ -177,22 +181,23 @@ function CalendarFun(props) {
           if (props.role === "admin") {
             if (formatedDate === scheduledDate.date && scheduledDate.approved) {
               // set message for approved date selected by admin
-              setModalMessage(adminDateApprovedMessage);
               setCancelUserename(scheduledDate.username);
+              setModalMessage(adminDateApprovedMessage);
               setCancelModal(true);
               setOpenModal(false);
               setShowLoader(false);
               break;
             } else if (formatedDate === scheduledDate.date) {
               // set message for admin selected date not approved
-              setModalMessage(adminDateUnapprovedMessage);
               setCancelUserename(scheduledDate.username);
+              setModalMessage(adminDateUnapprovedMessage);
               setCancelModal(true);
               setOpenModal(false);
               setShowLoader(false);
               break;
             } else {
               // set message for non-scheduled dates
+              setModalHeader(emptyHeader);
               setModalMessage(adminDateNotScheduledMessage);
               setModalOptions(true);
               setOpenModal(true);
@@ -205,20 +210,21 @@ function CalendarFun(props) {
               if (formatedDate === scheduledDate.date && scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
                 // message for approved date selected same user
                 setModalMessage(userAcceptedMessage);
-                setModalOptions(false);
                 setCancelModal(true);
                 setOpenModal(false);
                 setShowLoader(false);
                 break;
               } else if (formatedDate === scheduledDate.date && !scheduledDate.approved && userName.toLowerCase() === scheduledDate.username) {
                 // message for not approved selected same user
+                setModalHeader(emptyHeader);
                 setModalMessage(userUnacceptedMessage);
-                setModalOptions(false);
-                setOpenModal(true);
+                setCancelModal(true);
+                setOpenModal(false);
                 setShowLoader(false);
                 break;
               } else if (formatedDate === scheduledDate.date) {
                 // message for scheduledDate selected not same user
+                setModalHeader(emptyHeader);
                 setModalMessage(unavailableMessage);
                 setModalOptions(false);
                 setOpenModal(true);
@@ -226,6 +232,7 @@ function CalendarFun(props) {
                 break;
               } else {
                 // message for day available
+                setModalHeader(soundsGreatHeader);
                 setModalMessage(availableMessage);
                 setModalOptions(true);
                 setOpenModal(true);
@@ -249,7 +256,7 @@ function CalendarFun(props) {
 
   const findElAndColor = (date, color) => {
     try {
-      console.log(date)
+      // console.log(date)
       const element = componentRef.current.querySelector(`abbr[aria-label='${date}'`);
       if (element) {
         let par = element.parentNode
@@ -260,7 +267,7 @@ function CalendarFun(props) {
           element.style.color = "white";
         }
       } else {
-        console.log("date not found;");
+        // console.log("date not found;");
       }
     } catch (e) {
       console.log("findElAndColor Error")
@@ -285,6 +292,7 @@ function CalendarFun(props) {
         }
       {openModal &&
         <SchedulingModal 
+          header={modalHeader}
           message={modalMessage}
           openAcceptedModal={setAcceptedModal}
           closeModalHandler={setOpenModal}
@@ -297,7 +305,8 @@ function CalendarFun(props) {
         />
       }
       {cancelModal &&
-        <CancelModal 
+        <CancelModal
+        message={modalMessage}
         formatedDate={formatedDate}
         username={cancelUsername || userName}
         closeModalHandler={setCancelModal}

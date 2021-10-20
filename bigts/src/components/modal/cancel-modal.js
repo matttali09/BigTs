@@ -87,6 +87,7 @@ export default function MyModal(props) {
             closeTimeoutMS={250}
           >
             <h2 ref={_subtitle => (subtitle = _subtitle)}>Cancel This Date.</h2>
+            <div className="modal-text">{props.message}</div>
             <div className="modal-text">{props.formatedDate}</div>
             <div className="schedule-btns">
                 <button className="yes-btn" onClick={cancelAndCloseModal}>Confirm</button>
