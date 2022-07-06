@@ -7,7 +7,7 @@ function noMatch() {
             <Link to="/signin" className="active">
                 <img
                     className="col s12 dead-link"
-                    src="./images/dead-link.png"
+                    src="../images/dead-link.png"
                     alt="Dead Link"
                     href="/signin"
                 />
