@@ -49,10 +49,10 @@ const RatesPage = (props) => {
     }
    
     return (
-        <div className="rates-page">
+        <div className="rates-page" id="rates-page">
             <div className="container mainContent center">
-                <h1>Half Day</h1>
                 <div className="rates-section">
+                    {/* <h1>Half Day</h1>
                     <div className="row half-day-rates">
                         <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
@@ -92,9 +92,9 @@ const RatesPage = (props) => {
                                 <button className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <h1>Customized Day</h1>
+                    <h1>RATE</h1>
                     <div className="row full-day-rates">
                         <div className="col-s-12 col-md-12 card">
                             <div className="img-wrap">
@@ -104,7 +104,7 @@ const RatesPage = (props) => {
                                 </div>
                             </div>
                             <div className="rate-txt-header">
-                                <h5>Call for customized length and style of trip!</h5>
+                                <h5>$125/hour Minimum 4 Hours | Up to Six People | All Ages | Intro and Advanced Off-Shore Fishing | Call for customized length and style of trip!</h5>
                             </div>
                             <div className="btn-wrap">
                                 <button id="contact" className="btn waves-effect half-day-btn" onClick={handleClick}>Book Now!</button>

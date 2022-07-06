@@ -3,11 +3,11 @@ import AwsSliderStyles from 'react-awesome-slider/src/core/styles.scss';
 
 const Slider = ({props}) => (
     <AwesomeSlider cssModule={AwsSliderStyles}>
-        <div data-src="../../images/Red-Grouper.jpg" />
-        <div data-src="../../images/Black-Grouper.JPG" />
-        <div data-src="../../images/Wahoo.JPG" />
-        <div data-src="../../images/Sail-Fish.JPG" />
-        <div data-src="../../images/Mahi.jpg" />
+        <div data-src="./images/Big-Ts-Snappers-Board.jpg" />
+        <div data-src="./images/Big-Ts-King.JPG" />
+        <div data-src="./images/Big-Ts-Grouper.JPG" />
+        <div data-src="./images/Big-Ts-Tuna.JPG" />
+        <div data-src="./images/Big-Ts-Mahi.jpg" />
     </AwesomeSlider>
 );
   

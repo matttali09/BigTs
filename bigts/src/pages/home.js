@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 
 import Slider from "../components/carousel/carousel.js"
 
@@ -21,9 +21,9 @@ class Home extends Component {
         <center>
           <h1>Gallery</h1>
           <Slider/>
-          <Link to="/scheduling" style={{"marginTop": "80px"}} className="main-btn btn btn-link waves-effect center">
+          <HashLink smooth to="/rates#nav-container" style={{"marginTop": "80px"}} className="main-btn btn btn-link waves-effect center" >
             <span className="black-txt">Schedule Your Adventure!</span>
-          </Link>
+          </HashLink>
         </center>
       </div>
     );

@@ -104,14 +104,14 @@ export default function AccountPage(props) {
     return (
         <div className="container mainContent">
             <div className="center">
-                <h2>Scheduled Dates</h2>
+                {/* <h2>Scheduled Dates</h2>
                 {!dates.length ? 
                 <p>No dates have been scheduled yet.</p>
                 : <div>
                     {props.role === "user" && <p className="info-text">Click on date in order to cancel.</p>}
                     <DatesTable username={userName} dates={dates} role={role} checkedDates={checkedDates}/>
                   </div>
-                }
+                } */}
                 <h2 className="account-info-header">Account Info</h2>
                 <div className="account-info">
                     <div className="row">
@@ -126,10 +126,10 @@ export default function AccountPage(props) {
                         <div className="column"><span className="column-label">Phone Number:</span></div>
                         <div className="column"><span className="column-info">{number}</span></div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="column"><span className="column-label">Role:</span></div>
                         <div className="column"><span className="column-info">{role}</span></div>
-                    </div>
+                    </div> */}
                     <div className="row">
                         <div className="column"><span className="column-label">Password:</span></div>
                         <div className="column">

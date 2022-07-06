@@ -62,7 +62,7 @@ class Nav extends Component {
                                 </Link>
                             </>
                         )}
-                        <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
+                            <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">The Boat</span>
                             </Link>
                             <Link to="/captain" className="btn btn-link waves-effect text-secondary center">
@@ -71,9 +71,9 @@ class Nav extends Component {
                             <Link to="/rates" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Rates</span>
                             </Link>
-                            <Link to="/scheduling" className="btn btn-link waves-effect text-secondary center">
+                            {/* <Link to="/scheduling" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">Scheduling</span>
-                        </Link>
+                            </Link> */}
                     </div>
                     
                     {/* LOGO and Slider Displayed on small screens */}
@@ -91,9 +91,9 @@ class Nav extends Component {
                         <Link to="/home" className="waves-effect sidenav-close">
                             <img className="nav-logo" src="../images/BigTs-logo.PNG" alt="Big Ts Logo"></img>
                         </Link>
-                        <Link to="/scheduling" className="waves-effect sidenav-close">
+                        {/* <Link to="/scheduling" className="waves-effect sidenav-close">
                             <span>Scheduling</span>
-                        </Link>
+                        </Link> */}
                         <Link to="/rates" className="waves-effect sidenav-close">
                             <span>Rates</span>
                         </Link>
