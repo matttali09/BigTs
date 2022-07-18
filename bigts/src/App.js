@@ -45,7 +45,7 @@ class App extends Component {
         {/* Routes to different components */}
         <main>
         <Switch>
-          <Route exact path="/"  render={() => <LoginForm updateUser={this.updateUser} />}
+          <Route exact path="/"  render={() => <Home />}
           />
           <Route exact path="/home" render={() => <Home />}
           />

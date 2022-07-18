@@ -43,7 +43,7 @@ class Nav extends Component {
                         </Link>
 
                         {/* Logged in dependent Navigation buttons */}
-                        {loggedIn ? (
+                        {/* {loggedIn ? (
                             <>
                                 <Link to="/signin" className="btn btn-link waves-effect text-secondary center" onClick={this.logout}>
                                     <span className="text-secondary">Logout</span>
@@ -61,7 +61,7 @@ class Nav extends Component {
                                     <span className="text-secondary">Login</span>
                                 </Link>
                             </>
-                        )}
+                        )} */}
                             <Link to="/boat" className="btn btn-link waves-effect text-secondary center">
                                 <span className="text-secondary">The Boat</span>
                             </Link>
@@ -105,7 +105,7 @@ class Nav extends Component {
                         </Link>
 
                         {/* Logged in dependent Navigation buttons */}
-                        {loggedIn ? (
+                        {/* {loggedIn ? (
                         <>
                             <Link to="/account" className="waves-effect sidenav-close">
                                 <span>Account</span>
@@ -123,7 +123,7 @@ class Nav extends Component {
                                 <span>Create Account</span>
                             </Link>
                         </>
-                        )}
+                        )} */}
                         <div className="waves-effect sidenav-close">
                             <i className="fas fa-arrow-circle-right"></i>
                         </div>
